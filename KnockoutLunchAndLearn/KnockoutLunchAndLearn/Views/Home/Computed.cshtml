@@ -1,0 +1,124 @@
+﻿@{
+    ViewBag.Title = "Computed";
+}
+
+@Html.Partial("_Navigation", "Computed")
+
+<h2>ko.Computed</h2>
+
+
+<p>Computed properties are just like custom getters in C#. You determine what they return based on the current information available.</p>
+
+<b>Terminology:</b>
+<ul>
+    <li><b>Subscriber :</b> Somebody who is listening for a change on an observable</li>
+    <li><b>Computed : </b> A function which updates itself based on it subscriptions to the observables used inside of the function</li>
+</ul>
+
+
+<h3>Example: </h3>
+<hr />
+First Name:
+<input type="text" data-bind="value: firstName" />
+Last Name:
+<input type="text" data-bind="value: lastName" />
+
+<h3 data-bind="text: fullName"></h3>
+
+<label>Subscriptions on First Name:</label><span data-bind="text: firstNameSubscriptions"></span>
+<label>Subscriptions on Last Name:</label><span data-bind="text: lastNameSubscriptions"></span>
+
+<button class="btn btn-primary" data-bind="click: AddStalker">Add Stalker</button>
+<button class="btn" data-bind="click: UpdateSubscribersCount">Check Count</button>
+<button class="btn" data-bind="click: AutoUpdateSubscriberCount">Auto Update Count</button>
+
+<ul data-bind="foreach: stalkers">
+    <li><span data-bind="text: stalkee"></span></li>
+</ul>
+<hr />
+<h4>Code: </h4>
+<pre>
+    function ViewModel() {
+        var self = this;
+
+        self.firstName = ko.observable("Matthew");
+        self.lastName = ko.observable("Lee");
+
+        self.fullName = ko.computed(function () {
+            return self.firstName() + " " + self.lastName();
+        });
+
+        self.firstNameSubscriptions = ko.observable(self.firstName.getSubscriptionsCount());
+        self.lastNameSubscriptions = ko.observable(self.lastName.getSubscriptionsCount());
+
+        self.UpdateSubscribersCount = function () {
+            self.firstNameSubscriptions(self.firstName.getSubscriptionsCount());
+            self.lastNameSubscriptions(self.lastName.getSubscriptionsCount());
+        };
+
+        self.AutoUpdateSubscriberCount = function () {
+            self.stalkers.subscribe(function () {
+                self.UpdateSubscribersCount();
+            });
+        };
+
+        self.stalkers = ko.observableArray();
+        self.AddStalker = function () {
+            self.stalkers.push(new Stalker(self.firstName, self.lastName));
+        };
+    };
+
+    function Stalker(first, last) {
+        var self = this;
+
+        self.stalkee = ko.computed(function () {
+            return first() + " " + last();
+        });
+    }
+</pre>
+
+@section scripts{
+    <script>
+        r("main", function () {
+            function ViewModel() {
+                var self = this;
+
+                self.firstName = ko.observable("Matthew");
+                self.lastName = ko.observable("Lee");
+
+                self.fullName = ko.computed(function () {
+                    return self.firstName() + " " + self.lastName();
+                });
+
+                self.firstNameSubscriptions = ko.observable(self.firstName.getSubscriptionsCount());
+                self.lastNameSubscriptions = ko.observable(self.lastName.getSubscriptionsCount());
+
+                self.UpdateSubscribersCount = function () {
+                    self.firstNameSubscriptions(self.firstName.getSubscriptionsCount());
+                    self.lastNameSubscriptions(self.lastName.getSubscriptionsCount());
+                };
+
+                self.AutoUpdateSubscriberCount = function () {
+                    self.stalkers.subscribe(function () {
+                        self.UpdateSubscribersCount();
+                    });
+                };
+
+                self.stalkers = ko.observableArray();
+                self.AddStalker = function () {
+                    self.stalkers.push(new Stalker(self.firstName, self.lastName));
+                };
+            };
+
+            function Stalker(first, last) {
+                var self = this;
+
+                self.stalkee = ko.computed(function () {
+                    return first() + " " + last();
+                });
+            }
+            ko.applyBindings(new ViewModel());
+        }).OnReady(["main"]);
+    </script>
+
+}

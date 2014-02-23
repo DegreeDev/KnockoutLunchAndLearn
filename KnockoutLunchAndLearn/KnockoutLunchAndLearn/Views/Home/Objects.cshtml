@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Objects";
+}
+@Html.Partial("_Navigation", "Objects")
+
+<h2>Objects and Arrays</h2>
+
+<div class="form-group">
+    <label for="name" class="control-label">Name</label>
+    <input class="form-control" id="name" data-bind="value: name" />
+</div>
+<div class="form-group">
+    <button class="btn btn-primary" data-bind="click: AddName">Add Name</button>
+</div>
+<div class="form-group">
+    <ul data-bind="foreach: names" class="list-group">
+        <li class="list-group-item">
+            <span data-bind="text: $data"></span>
+            <button data-bind="click: $parent.RemoveName" class="btn btn-link">Remove</button>
+        </li>
+    </ul>
+</div>
+
+@*Disclaimer: DONT DO THIS INLINE*@
+@section scripts {
+    <script>
+
+
+
+
+        function ViewModel() {
+            var self = this;
+
+            self.name = ko.observable();
+            self.names = ko.observableArray();
+
+            self.AddName = function () {
+                self.names.push(self.name());
+                self.name("");
+            };
+            self.RemoveName = function (name) {
+                self.names.remove(name);
+            };
+        }
+
+        ko.applyBindings(new ViewModel());
+    </script>
+}

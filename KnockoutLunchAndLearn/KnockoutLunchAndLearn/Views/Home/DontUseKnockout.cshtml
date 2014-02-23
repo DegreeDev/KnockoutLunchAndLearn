@@ -1,0 +1,19 @@
+﻿@model KnockoutLunchAndLearn.Models.SimpleFormModel
+
+@{
+    ViewBag.Title = "DontUseKnockout";
+}
+@Html.Partial("_Navigation", "DontUseKnockout")
+<h2>Don't Use Knockout for something like this</h2>
+
+
+@using(Html.BeginForm("DontUseKnockout", "Home", FormMethod.Post)){
+    @Html.HiddenFor(x => Model.Id)
+    @Html.Label("Name")
+    @Html.TextBoxFor(x=> Model.Name)
+
+    @Html.Label("Description")
+    @Html.TextBoxFor(x=> Model.Description)
+
+    <input type="submit" class="btn" value="Save"/>
+}
