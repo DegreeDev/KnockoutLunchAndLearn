@@ -68,5 +68,9 @@ namespace KnockoutLunchAndLearn.Controllers
         {
             return View();
         }
+        public ActionResult BindingContext()
+        {
+            return View();
+        }
     }
 }
