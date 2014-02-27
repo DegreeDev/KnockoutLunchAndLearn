@@ -1,13 +1,13 @@
 ﻿@{
-    ViewBag.Title = "Custom Binding Handlers";
+	ViewBag.Title = "Custom Binding Handlers";
 }
 @Html.Partial("_Navigation", "BindingHandlers")
 <h2>Binding Handlers</h2>
 <hr />
 <h4>Links</h4>
 <ul>
-    <li><a href="http://knockoutjs.com/documentation/custom-bindings.html">Creating Custom Bindings</a></li>
-    <li><a href="http://www.knockmeout.net/2011/07/another-look-at-custom-bindings-for.html">Another Look at custom binding handlers</a></li>
+	<li><a href="http://knockoutjs.com/documentation/custom-bindings.html">Creating Custom Bindings</a></li>
+	<li><a href="http://www.knockmeout.net/2011/07/another-look-at-custom-bindings-for.html">Another Look at custom binding handlers</a></li>
 </ul>
 <p>Custom Binding handlers are how Knockout knows how to deal with external libraries.</p>
 <p>There are binding handlers that come with knockout: foreach, template, text, value, attr, visible, if, ifnot, with, css, html, style, click, event, submit, enable, disable, hasFocus, check, options, optionsText, optionsValue, optionsCaption, selectedOptions and uniqueName </p>
@@ -17,90 +17,99 @@
 <h4>Example: </h4>
 
 <pre>
-    ko.bindingHandlers.clickBox = {
-        init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
-            var $element = $(element),
-                observable = valueAccessor(),
-                enable = allBindingsAccessor().enabled || true,
-                action = allBindingsAccessor().action,
-                name = allBindingsAccessor().actionName,
-                $button = $("< button class='btn btn-default' type='button '/>"),
-                $span = $("< span class='input-group-btn' />");
+ko.bindingHandlers.clickBox = {
+	init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+		var $element = $(element),
+			observable = valueAccessor(),
+			enable = allBindingsAccessor().enabled || true,
+			action = allBindingsAccessor().action,
+			remove = allBindingsAccessor().remove,
+			name = allBindingsAccessor().actionName,
+			$button = $("<button class='btn btn-default' type='button '/>"),
+			$remove = $("<button class='btn btn-danger' type='button'/>"),
+			$span = $("<span class='input-group-btn' />");
 
-            $element.wrap("< div class='input-group' />");
-            $element.after($span);
-            $element.addClass("form-control");
-            $span.html($button);
+		$element.wrap("<div class='input-group' />");
+		$element.after($span);
+		$remove.text("Remove");
+		$element.addClass("form-control");
+		$span.append($button).append($remove);
+					
 
-            ko.applyBindingsToNode($button.get(0), { click: action, text: name });
-            ko.applyBindingsToNode(element, { value: observable });
-        },
-        update: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+		ko.applyBindingsToNode($button[0], { click: action, text: name });
+		ko.applyBindingsToNode($remove[0], { click: function () { remove(ko.dataFor(element)); } });
+		ko.applyBindingsToNode(element, { value: observable });
+	},
+	update: function (element, valueAccessor, allBindingsAccessor, viewModel) {
 
-        }
-    }
+	}
+}
 </pre>
 <h4>In Action:</h4>
 <pre>
-    <button class="btn btn-link" data-bind="click: AddThing">+ Add Thing</button>
-    <!-- ko foreach: things -->
-    <input data-bind="clickBox: text, enable: isEnabled, action: Toggle, actionName: text" />
-    <button class="btn btn-link" data-bind="click: $parent.RemoveThing">Remove Thing</button>
-    <!-- /ko -->
+	<button class="btn" data-bind="click: AddThing">Add</button>
+	<!-- ko foreach: things -->
+		<input data-bind="clickBox: text, enable: isEnabled, action: Toggle, remove : $parent.RemoveThing, actionName: text" />
+	<!-- /ko -->
 </pre>
 
 <p>What we can see here is that every time the thing is taken out of the DOM and put back in the DOM, the init binding handler is run.</p>
 
 @section scripts{
-    <script>
-        r("main", function () {
-                function ViewModel() {
-                    var self = this;
+	<script>
+		r("main", function () {
+				function ViewModel() {
+					var self = this;
 
-                    self.things = ko.observableArray();
-                    self.AddThing = function () {
-                        self.things.push(new Thing());
-                    };
-                    self.RemoveThing = function (thing) {
-                        self.things.remove(thing);
-                    };
-                }
-                function Thing() {
-                    var self = this;
+					self.things = ko.observableArray();
+					self.AddThing = function () {
+						self.things.push(new Thing());
+					};
+					self.RemoveThing = function (thing) {
+						self.things.remove(thing);
+					};
+				}
+				function Thing() {
+					var self = this;
 
-                    self.text = ko.observable("test");
-                    self.isEnabled = ko.observable(true);
-                    self.Toggle = function () {
-                        self.isEnabled(!self.isEnabled());
-                    };
-                }
+					self.text = ko.observable("test");
+					self.isEnabled = ko.observable(true);
+					self.Toggle = function () {
+						self.isEnabled(!self.isEnabled());
+					};
+				}
 
-                ko.applyBindings(new ViewModel());
-        }).OnReady(["clickBox", "main"]);
+				ko.applyBindings(new ViewModel());
+		}).OnReady(["clickBox", "main"]);
 
-        r("clickBox", function () {
-            ko.bindingHandlers.clickBox = {
-                init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
-                    var $element = $(element),
-                        observable = valueAccessor(),
-                        enable = allBindingsAccessor().enabled || true,
-                        action = allBindingsAccessor().action,
-                        name = allBindingsAccessor().actionName,
-                        $button = $("<button class='btn btn-default' type='button '/>"),
-                        $span = $("<span class='input-group-btn' />");
+		r("clickBox", function () {
+			ko.bindingHandlers.clickBox = {
+				init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+					var $element = $(element),
+						observable = valueAccessor(),
+						enable = allBindingsAccessor().enabled || true,
+						action = allBindingsAccessor().action,
+						remove = allBindingsAccessor().remove,
+						name = allBindingsAccessor().actionName,
+						$button = $("<button class='btn btn-default' type='button '/>"),
+						$remove = $("<button class='btn btn-danger' type='button'/>"),
+						$span = $("<span class='input-group-btn' />");
 
-                    $element.wrap("<div class='input-group' />");
-                    $element.after($span);
-                    $element.addClass("form-control");
-                    $span.html($button);
+					$element.wrap("<div class='input-group' />");
+					$element.after($span);
+					$remove.text("Remove");
+					$element.addClass("form-control");
+					$span.append($button).append($remove);
+					
 
-                    ko.applyBindingsToNode($button.get(0), { click: action, text: name });
-                    ko.applyBindingsToNode(element, { value: observable });
-                },
-                update: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+					ko.applyBindingsToNode($button[0], { click: action, text: name });
+					ko.applyBindingsToNode($remove[0], { click: function () { remove(ko.dataFor(element)); } });
+					ko.applyBindingsToNode(element, { value: observable });
+				},
+				update: function (element, valueAccessor, allBindingsAccessor, viewModel) {
 
-                }
-            }
-        });
-    </script>
+				}
+			}
+		});
+	</script>
 }

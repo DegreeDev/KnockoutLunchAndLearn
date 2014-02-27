@@ -2,32 +2,16 @@
     ViewBag.Title = "Bindings";
 }
 @Html.Partial("_Navigation", "Bindings")
-<h2>Bindings</h2>
-
-
-<pre>
-    ko.applyBindings(new ViewModel());
-
-    or
-
-    ko.applyBindings(new ViewModel(), $("#id").get(0));
-
-    or
-
-    ko.applyBindings(new ViewModel(), $("#id")[0]);
-</pre>
-
-<p>
-    When applying the bindings ( and in knockout in general )  you are using the element not the jQuery selector
-</p>
-<p>
-    Bindings should be the last thing you do. All of the object that you need should already be on the page and ready to be set up. 
-</p>
-
+<h2>The Binding Context</h2>
+<p>When applying the bindings ( and in knockout in general )  you are using the element not the jQuery selector</p>
+<p>Bindings should be the last thing you do. All of the object that you need should already be on the page and ready to be set up. </p>
 
 <pre>
-    ko.applyBindings(new ViewModel())
+ko.applyBindings(new ViewModel());                  //Generic
+ko.applyBindings(new ViewModel(), $("#id").get(0)); //Specific(Slower)
+ko.applyBindings(new ViewModel(), $("#id")[0]);     //Specifc (Faster)
 </pre>
+
 <p>
     This applys bindings to the entire page. In general I suggest not using this becuase it limits the use of knockout for other people who may live on your page. 
     An example of this in SPP is that we have a "Notification Center" which is bound with knockout. This appears on multiple pages. If an ko app binds to the entire page
@@ -36,13 +20,10 @@
 
 
 <pre>
-    ko.applyBindings(new ViewModel(), $("#my-element").get(0));
-
-    ko.applyBindings(new ViewModel(), $("#notification-center").get(0));
-
-    < div id="notification-center">< /div>
-
-    < div id="my-element">< /div>
+ko.applyBindings(new ViewModel(), $("#my-element")[0]);
+ko.applyBindings(new ViewModel(), $("#notification-center")[0]);
+< div id="notification-center">< /div>
+< div id="my-element">< /div>
 
 </pre>
 

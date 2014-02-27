@@ -9,12 +9,10 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div id="body" class="container">
+    <div class="container">
         @RenderBody()
     </div>
-
     @Scripts.Render("~/bundles/lib")
     @RenderSection("scripts", required: false)
-
 </body>
 </html>
