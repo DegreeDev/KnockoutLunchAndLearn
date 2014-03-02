@@ -72,5 +72,9 @@ namespace KnockoutLunchAndLearn.Controllers
         {
             return View();
         }
+        public ActionResult Require()
+        {
+            return View();
+        }
     }
 }

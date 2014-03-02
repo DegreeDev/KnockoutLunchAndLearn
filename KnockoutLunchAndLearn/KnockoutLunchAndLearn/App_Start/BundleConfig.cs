@@ -10,9 +10,14 @@ namespace KnockoutLunchAndLearn
         {
             bundles.Add(new ScriptBundle("~/bundles/lib").Include(
                         "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/knockout-3.0.0.js",
+                        //"~/Scripts/knockout-3.0.0.js",
                         "~/Scripts/bootstrap.js",
                         "~/Scripts/app/registrar.js"
+                        )
+            );
+
+            bundles.Add(new ScriptBundle("~/bundles/require").Include(
+                        "~/Scripts/require.js"
                         )
             );
 
