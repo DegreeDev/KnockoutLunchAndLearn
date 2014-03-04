@@ -291,6 +291,7 @@
     <Content Include="Scripts\builder\registrar.js" />
     <Content Include="Scripts\builder\services.js" />
     <Content Include="Scripts\builder\viewModel.js" />
+    <Content Include="Scripts\knockout-sortable.js" />
     <Content Include="Scripts\loading\bindings.js" />
     <Content Include="Scripts\app\registrar.js" />
     <Content Include="Scripts\loading\viewModel.js" />
@@ -364,6 +365,7 @@
     <Content Include="Views\Home\Computed.cshtml" />
     <Content Include="Views\Home\Observables.cshtml" />
     <Content Include="Views\Home\Require.cshtml" />
+    <Content Include="Views\Home\Form.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
