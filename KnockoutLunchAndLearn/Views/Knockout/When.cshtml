@@ -1,0 +1,188 @@
+﻿@{
+    ViewBag.Title = "When";
+    var usersUrl = Url.Action("GetUsers");
+    var processUrl = Url.Action("GetProcesses");
+}
+
+<h2>When</h2>
+
+<div id="viewmodel" role="form">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Select User</label>
+                <input type="text" class="form-control twitter-typeahead" data-bind="typeAhead: { url: '@usersUrl', name: 'name', displayKey: 'displayKey', value: userId, name: userName }" />
+                <label data-bind="text: userId"></label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Select Process</label>
+                <input type="text" class="form-control twitter-typeahead" data-bind="typeAhead : { url : '@processUrl', name: 'name', displayKey: 'displayKey', value: processId, name:processName }" />
+                <label data-bind="text: processId"></label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <button class="btn btn-primary" data-bind="click: AddUserToProcess">Add To Process</button>
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-md-12">
+            <div class="alert" data-bind="visible: message, css : messageCss" ><!-- ko text: message --><!-- /ko --><i class="glyphicon glyphicon-remove pull-right" data-bind="click: messageClose"></i></div>
+            
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/handlebars-v1.3.0.js"></script>
+    @*<script src="~/Scripts/typeahead.bundle.js"></script>*@
+    <script src="~/Scripts/bloodhound.js"></script>
+    <script src="~/Scripts/typeahead.jquery.js"></script>
+    <script>
+        ko.bindingHandlers.typeAhead = {
+            init: function (e, va, aba, vm, bc) {
+                console.log(ko.unwrap(va()));
+                var value = ko.unwrap(va()),
+                    url = value.url,
+                    name = value.name,
+                    displayKey = value.displayKey,
+                    options = new Bloodhound({
+                        datumTokenizer: function (d) { return Bloodhound.tokenizers.whitespace(d.name); },
+                        queryTokenizer: Bloodhound.tokenizers.whitespace,
+                        limit: 10,
+                        remote: {
+                            url: url,
+                            filter: function (list) {
+                                return $.map(list, function (n) {
+                                    console.log(n.name + " " + n.displayName);
+                                    return { name: n.name, displayKey: n.displayName }; 
+                                });
+                            }
+                        }
+                    });
+
+                options.initialize();
+
+                $(e).typeahead({
+                    minLength: 3,
+                    highlight: true,
+                }, {
+                    name: name,
+                    displayKey: displayKey,
+                    source: options.ttAdapter(),
+                    
+                });
+                ko.applyBindingsToNode(e, {
+                    event : { 
+                        'typeahead:selected' : function(data, event, binding, other){
+                            va().value(binding.name);
+                            va().name(binding.displayKey)
+                        }
+                    }
+                });
+            }
+        }
+
+        function ViewModel() {
+            var self = this;
+            self.processId = ko.observable();
+            self.processName = ko.observable();
+
+            self.userId = ko.observable();
+            self.userName = ko.observable();
+
+            self.message = ko.observable();
+            self.messageType = ko.observable();
+            self.messageCss = ko.computed(function(){
+                return self.messageType() === services.messageType.succcess ? "alert-success" : "alert-danger";
+            });
+            self.messageClose = function(){
+                self.message(null);
+            };
+            self.AddUserToProcess = function() {
+                services.AddUserToProcess(self.userId, self.processId, function(data){
+                    self.message(data.message);
+                    self.messageType(data.result ? services.messageType.succcess : services.messageType.error);
+                });
+            }
+        }
+
+        var services = {
+            availableProcesses: ko.observableArray(),
+            availableUsers: ko.observableArray(),
+            AddUserToProcess: function (userId, processId, callback) {
+                $.ajax({
+                    url: "@Url.Action("AddUserToProcess", "Knockout")",
+                    data : ko.toJSON({ userId: userId, processId: processId }),
+                    contentType : "application/json",
+                    type: "POST",
+                    success: function (data) {
+                        callback(data);
+                    },
+                    error: function (error) {
+                        Alert("User could not be added to process");
+                    }
+                });
+            },
+            messageType : { succcess : "success", error: "error" }
+        };
+
+        ko.applyBindings(new ViewModel(), document.getElementById("viewmodel"));
+    </script>
+    <style>
+        .twitter-typeahead .tt-query,
+        .twitter-typeahead .tt-hint {
+            margin-bottom: 0;
+        }
+
+        .tt-dropdown-menu {
+            min-width: 160px;
+            margin-top: 2px;
+            padding: 5px 0;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border: 1px solid rgba(0,0,0,.2);
+            *border-right-width: 2px;
+            *border-bottom-width: 2px;
+            -webkit-border-radius: 6px;
+            -moz-border-radius: 6px;
+            border-radius: 6px;
+            -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            -webkit-background-clip: padding-box;
+            -moz-background-clip: padding;
+            background-clip: padding-box;
+        }
+
+        .tt-suggestion {
+            display: block;
+            padding: 3px 20px;
+        }
+
+            .tt-suggestion.tt-is-under-cursor {
+                color: #fff;
+                background-color: #0081c2;
+                background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
+                background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3));
+                background-image: -webkit-linear-gradient(top, #0088cc, #0077b3);
+                background-image: -o-linear-gradient(top, #0088cc, #0077b3);
+                background-image: linear-gradient(to bottom, #0088cc, #0077b3);
+                background-repeat: repeat-x;
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0);
+            }
+
+                .tt-suggestion.tt-is-under-cursor a {
+                    color: #fff;
+                }
+
+            .tt-suggestion p {
+                margin: 0;
+            }
+    </style>
+}

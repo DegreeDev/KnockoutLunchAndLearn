@@ -1,0 +1,118 @@
+﻿@model KnockoutLunchAndLearn.Models.ComplicatedFormModel
+
+@{
+	ViewBag.Title = "DoUseKnockout";
+}
+
+@Html.Partial("_Navigation", "DoUseKnockout")
+
+<h2>Do Use Knockout</h2>
+
+<input type="hidden" data-ko-id="@Model.Id" />
+
+<form data-bind="with: ComplicatedFormModel" class="form-horizontal">
+	<div class="row">
+		<div class="form-group col-md-6">
+			<label for="name" class="control-label">Name</label>
+			<input class="form-control" id="name" type="text" data-bind="value: Name" />
+		</div>
+	</div>
+	<div class="row">
+		<div class="form-group col-md-6">
+			<label for="desc" class="control-label">Description</label>
+			<textarea class="form-control" id="desc" data-bind="value: Description"></textarea>
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="control-label">Cart</label>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>
+						Item</th>
+					<th>
+						Price</th>
+					<th>
+						Quantity</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody data-bind="foreach: Items">
+				<tr>
+					<td>
+						<select data-bind="options: $root.NameOptions, value: Name"></select>
+					</td>
+					<td>
+						<input type="number" data-bind="value: SimplePrice" />
+					</td>
+					<td>
+						<input type="number" data-bind="value: Quantity" />
+					</td>
+					<td>
+						<button class="btn btn-link" data-bind="click: $parent.RemoveItem">Remove</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<button class="btn" data-bind="click: AddItem">Add Item</button>
+	<button class="btn btn-primary" data-bind="click: $root.Save">Save</button>
+</form>
+
+
+@*Disclaimer: DONT DO THIS INLINE*@
+@section scripts {
+	<script>
+		function ViewModel() {
+			var self = this;
+
+			self.ComplicatedFormModel = new ComplicatedFormModel($("[data-ko-id]").data('ko-id'));
+
+			self.Save = function () {
+
+				var data = ko.toJSON(self.ComplicatedFormModel);
+
+				alert(data);
+
+				$.ajax({
+					url: "@Url.Action("DoUseKnockout")",
+                	type: "POST",
+                	contentType: "application/json",
+                	data: data,
+                	success: function () {
+                		alert("SAVED EVERYTHING");
+                	}
+                });
+            };
+
+			self.NameOptions = [
+                "Helmet", "Skates", "Gloves", "Stick", "Kneepads"
+			];
+
+		}
+		function ComplicatedFormModel(id) {
+			var self = this;
+			self.Id = ko.observable(id);
+			self.Name = ko.observable();
+			self.Description = ko.observable();
+			self.Items = ko.observableArray();
+
+			self.AddItem = function () {
+				self.Items.push(new CartItem());
+			};
+			self.RemoveItem = function (item) {
+				self.Items.remove(item);
+			};
+		}
+		function CartItem() {
+			var self = this;
+
+			self.Id = ko.observable();
+			self.Name = ko.observable();
+			self.SimplePrice = ko.observable(100);
+			self.Quantity = ko.observable(1);
+		}
+
+		ko.applyBindings(new ViewModel());
+
+	</script>
+}
