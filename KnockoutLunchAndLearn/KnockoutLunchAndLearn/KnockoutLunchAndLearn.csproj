@@ -193,7 +193,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\KnockoutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -284,6 +284,7 @@
     <Content Include="Scripts\app\services.js" />
     <Content Include="Scripts\app\viewModel.js" />
     <Content Include="Scripts\bindingHandlers\handleSomething.js" />
+    <Content Include="Scripts\bloodhound.js" />
     <Content Include="Scripts\builder\bindings.js" />
     <Content Include="Scripts\builder\domReady.js" />
     <Content Include="Scripts\builder\formBuilder.js" />
@@ -291,6 +292,7 @@
     <Content Include="Scripts\builder\registrar.js" />
     <Content Include="Scripts\builder\services.js" />
     <Content Include="Scripts\builder\viewModel.js" />
+    <Content Include="Scripts\handlebars-v1.3.0.js" />
     <Content Include="Scripts\knockout-sortable.js" />
     <Content Include="Scripts\loading\bindings.js" />
     <Content Include="Scripts\app\registrar.js" />
@@ -317,6 +319,8 @@
     <Content Include="Scripts\modernizr-2.7.1.js" />
     <Content Include="Scripts\require.js" />
     <Content Include="Scripts\require.min.js" />
+    <Content Include="Scripts\typeahead.bundle.js" />
+    <Content Include="Scripts\typeahead.jquery.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -366,6 +370,7 @@
     <Content Include="Views\Home\Observables.cshtml" />
     <Content Include="Views\Home\Require.cshtml" />
     <Content Include="Views\Home\Form.cshtml" />
+    <Content Include="Views\Knockout\When.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
