@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Require";
+}
+@Html.Partial("_Navigation", "Require")
+<h2>Require</h2>
+
+
+<span class="label label-success" data-bind="text: name"></span>
+<button class="btn" data-bind="handleSomething: {}">Handle</button>
+
+@section scripts {
+    <script>
+        require.config({
+            baseUrl: "@Url.Content("~/Scripts/")",
+            paths: {
+                builder: "@Url.Content("~/Scripts/builder")"
+            }
+        });
+        require.config({
+            paths: {
+                bindingHandlers: "@Url.Content("~/Scripts/bindingHandlers")"
+            },
+            map: {
+                '*' : {
+                    'ko': 'knockout-3.0.0'
+                }
+            }
+        });
+    </script>
+    <script src="~/Scripts/builder/bindings.js"></script>
+}

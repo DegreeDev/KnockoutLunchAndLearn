@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Loading";
+}
+@Html.Partial("_Navigation", "Loading")
+
+<h2>Loading</h2>
+
+<p>Making sure that all of the scripts get loaded in the correct order is a very important piece of an JavaScript application. If you try and access an object before it had been loaded your app will simply not work.</p>
+<p>This creates problems where you need to import all of your files in the order in which they need to be registered and run.</p>
+<p>Traditionally if you don't have anything like RequireJS ( I'll get to that later ) you just import them in the correct order. </p>
+<p>Alternatively you can bring them in and trigger them to run in a specific order ( How RegistrarJS works ). </p>
+
+<h4>Links</h4>
+<ul>
+    <li><a href="http://requirejs.org/docs/jquery.html">RequireJS</a></li>
+    <li><a href="http://knockoutjs.com/documentation/amd-loading.html">Knockoutjs and AMD</a></li>
+    <li><a href="https://github.com/DegreeDev/Registrar">Registrar</a></li>
+</ul>
+
+<h4>How to use RegistrarJS</h4>
+<pre>
+r("key", function () {
+    (function ($, ko, exports) {
+        //run your code here
+    })(window.jQuery, window.ko, window);
+}).OnReady(["key1", "key2", "key3"]);
+</pre>
+
+<p>The idea behind this is you register all of your modules that you want to have on your page. Once jQuery is ready, it will start firing trigger which run their respective callback which you set up.</p>
+<h4>Key Points:</h4>
+<ul>
+    <li>If a key is not found, it will throw an error.</li>
+    <li>You must have one and only one "OnReady"</li>
+    <li>Registrar will run the keys synchronously in the order you specify. </li>
+    <li>Keys must be unique</li>
+    <li>Registrar does not deal with external libraries (jQuery, Knockout, Underscore) it assumes you've loaded them first.</li>
+</ul>
+<hr />
+<h2>Import Mixins</h2>
+
+<p>This variation of the pattern demonstrates how globals (e.g jQuery, Underscore) can be passed in as arguments to our module's anonymous function. This effectively allows us to import them and locally alias them as we wish.</p>
+<p>From the example above we can see that jQuery, ko, and the window are passed in and locally aliased for our use.</p>
+
+<h2>Example</h2>
+<pre>
+    (function ($, ko, services) {
+        //run your code here
+    })(window.jQuery, window.ko, window.savo.innovation.accelerator.formbuilder.services);
+</pre>
+
+<p>As we can see above, there has been some bad name spacing ( not that it really exists in JavaScript ) and now our services code is buried deep inside a rather lengthy object.</p>
+<p>We are able to pass it into our function and alias it as 'services'. Essentially what this is doing is creating a function that takes some parameters. It is then instantly calling it with those parameters, which just like any other function, you can rename them to whatever you want in the function definition.</p>
+
+@section scripts{
+    @Scripts.Render("~/bundles/loading")
+}
