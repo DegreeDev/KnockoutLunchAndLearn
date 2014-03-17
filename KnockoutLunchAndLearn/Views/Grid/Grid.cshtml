@@ -14,9 +14,14 @@
 	<label data-bind="text: currentCount"></label>
 	<select data-bind="visible: pageSizeFilterOptions, options: pageSizeFilterOptions, value: pageSize, event: { 'change': GetCurrentPage }">
 	</select>
+    <label data-bind="text: 'Current Page:'  + page()"></label>
 	<ul class="pagination">
 		<li><a href="#" data-bind="click: GetPreviousPage">&laquo;</a></li>
-		<li><a href="#"  data-bind="text: page"></a></li>
+        
+        <!-- ko foreach: pages-->
+        <li><a href="#" data-bind="text: $data"></a></li>
+		<!-- /ko -->
+
 		<li><a href="#" data-bind="click: GetNextPage">&raquo;</a></li>
 	</ul>
 </div>
