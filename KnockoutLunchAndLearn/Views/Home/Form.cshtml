@@ -139,6 +139,26 @@
 
 @section scripts {
 	<script>
+		(function(exports){
+			exports.sink = {
+				Update: function (data) {
+					console.log(ko.toJSON(data));
+				},
+				Track: function (data) {
+
+				},
+				Sync : function (value) {
+					console.log(value);
+					value.subscribe(function (newValue) {
+						exports.sink.Update(newValue);
+					});
+				}
+			};
+			
+
+
+		})(window);
+
 		function Template() {
 			var self = this;
 
@@ -155,6 +175,8 @@
 			self.AddStage = function () {
 				self.stages.push(new Stage(self.stages().length + 1));
 			};
+
+			sink.Sync(ko.toJSON(self));
 		}
 
 		function Stage(index) {

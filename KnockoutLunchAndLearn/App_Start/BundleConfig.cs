@@ -14,7 +14,8 @@ namespace KnockoutLunchAndLearn
 						"~/Scripts/knockout-3.0.0.js",
                         "~/Scripts/bootstrap.js",
                         "~/Scripts/app/registrar.js",
-						"~/Scripts/knockout-sortable.js"
+						"~/Scripts/knockout-sortable.js",
+						"~/Scripts/knockout.mapping-latest.js"
                         )
             );
 

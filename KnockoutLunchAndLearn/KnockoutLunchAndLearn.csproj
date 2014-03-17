@@ -193,8 +193,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\KnockoutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LunchController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -280,6 +282,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Scripts\accounting.js" />
+    <Content Include="Scripts\accounting.min.js" />
     <Content Include="Scripts\app\bindings.js" />
     <Content Include="Scripts\app\init.js" />
     <Content Include="Scripts\app\services.js" />
@@ -296,6 +300,7 @@
     <Content Include="Scripts\DataGrid.js" />
     <Content Include="Scripts\handlebars-v1.3.0.js" />
     <Content Include="Scripts\knockout-sortable.js" />
+    <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Scripts\loading\bindings.js" />
     <Content Include="Scripts\app\registrar.js" />
     <Content Include="Scripts\loading\viewModel.js" />
@@ -374,6 +379,8 @@
     <Content Include="Views\Home\Form.cshtml" />
     <Content Include="Views\Knockout\When.cshtml" />
     <Content Include="Views\Grid\Grid.cshtml" />
+    <Content Include="Views\Lunch\Index.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
