@@ -3,16 +3,15 @@
 }
 <div class="row" style="margin-bottom: 500px;">
 	<div class="jumbotron" id="top">
-		<h1>What is Knockoutjs?</h1>
+		<h1>What is Knockoutjs? Why should I use it?</h1>
 		<p>Knockout is a JavaScript library which helps connect JavaScript to HTML.</p>
-		<p><a class="btn btn-primary btn-lg" role="button" href="http://knockoutjs.com">Learn more</a></p>
 	</div>
 	<ul>
-		<li><h2>Knockout is Javascript</h2></li>
-		<li><h2>Knockout is a publisher subscriber system</h2></li>
+		<li><h2>Knockout is pure JavaScript (no dependency on jQuery)</h2></li>
 		<li><h2>Knockout is cross browser (IE 6+, Firefox 2+, Chrome, Opera, Safari)</h2></li>
-		<li><h2>Knockout is AMD complient</h2></li>
 		<li><h2>Knockout is extensible (<a href="http://knockoutjs.com/documentation/custom-bindings.html">custom binding handlers</a>, <a href="http://knockoutjs.com/documentation/extenders.html">extenders</a>, <a href="http://knockoutjs.com/documentation/fn.html">fn</a>)</h2></li>
+		<li><h2>Knockout uniformly provides responsive interaction across browsers</h2></li>
+		<li><h2>Knockout helps simplify (for the developer) complicated user interface interactions</h2></li>
 	</ul>
 	<a href="#more" data-scroll-to="#more">More</a>
 </div>
@@ -20,36 +19,9 @@
 	<div id="more">
 		<div class="jumbotron">
 			<h1>When to use Knockoutjs?</h1>
-			<p>
-
-			</p>
-			<p><a class="btn btn-primary btn-lg" role="button" href="http://knockoutjs.com">Learn more</a></p>
 		</div>
 	</div>
 	<div class="panel panel-default">
-		<div class="panel-heading">Don't use Knockout</div>
-		<div class="panel-body" id="dont-use">
-			<form role="form">
-				<div class="form-group">
-					<label for="exampleInputEmail1">Email address</label>
-					<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-				</div>
-				<div class="form-group">
-					<label for="exampleInputPassword1">Password</label>
-					<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-				</div>
-				<div class="checkbox">
-					<label>
-						<input type="checkbox"> Check me out
-					</label>
-				</div>
-				<button type="submit" class="btn btn-default">Submit</button>
-			</form>
-		</div>
-	</div>
-
-	<div class="panel panel-default">
-		<div class="panel-heading">You can use Knockout</div>
 		<div class="panel-body" id="can-use">
 			<div class="row">
 				<div class="col-lg-8">
@@ -68,9 +40,7 @@
 								<td data-bind="text: name"></td>
 								<td data-bind="text: description"></td>
 								<td data-bind="text: developerText"></td>
-								<td>
-									<input type="checkbox" data-bind="checked: isFull" />
-								</td>
+								<td><input type="checkbox" data-bind="checked: isFull" /></td>
 								<td>
 									<button class="btn btn-primary btn-xs" data-bind="click: $parent.EditProject" data-toggle="modal" data-target="#edit-modal"><i class="glyphicon glyphicon-cog"></i> Edit</button>
 									<button class="btn btn-danger btn-xs" data-bind="click: $parent.RemoveProject"><i class="glyphicon glyphicon-trash"></i> Remove</button>
@@ -90,12 +60,8 @@
 						</thead>
 						<tbody data-bind="foreach: transactions">
 							<tr>
-								<td>
-									<!-- ko text: type--><!-- /ko -->
-								</td>
-								<td>
-									<!-- ko text: ko.toJSON(data)--><!-- /ko -->
-								</td>
+								<td><!-- ko text: type--><!-- /ko --></td>
+								<td><!-- ko text: ko.toJSON(data)--><!-- /ko --></td>
 							</tr>
 						</tbody>
 					</table>
@@ -136,7 +102,6 @@
 					</div>
 				</div>
 			</div>
-
 			<div class="modal fade" id="add-modal" tabindex="-1" role="dialog" aria-labelledby="add-modalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -173,6 +138,10 @@
 			</div>
 		</div>
 	</div>
+	<div class="form-group">
+		<h5>104 Lines of HTML</h5>
+		<h5>65 Lines of JS</h5>
+	</div>
 	<a href="#what" data-scroll-to="#what">More</a>
 </div>
 <div class="row" style="margin-bottom: 500px;">
@@ -183,13 +152,11 @@
 	</div>
 	<ul>
 		<li>
-			<h2>As a devloper</h2>
+			<h2>As a developer</h2>
 			<ul>
 				<li><h3>An easy way keep the UI in sync with your underlying data model</h3></li>
 				<li><h3>Easy use of templates to model your data (not unique to Knockout by any means)</h3></li>
-				<li><h3>You can write custom binding handlers for specific data (numbers, dates, currency and the dereaded CKEDITOR)</h3></li>
-
-
+				<li><h3>You can write custom binding handlers for specific data (numbers, dates, currency and the dreaded CKEDITOR)</h3></li>
 			</ul>
 		</li>
 	</ul>
@@ -218,16 +185,10 @@
 	<p>
 		<ul>
 			<li>
-				<h3>AMD (use RequireJS)</h3>
-			</li>
-			<li>
-				<h3>CSS - Knockout has no clue what "body : { display : none !important; }" is.</h3>
-			</li>
-			<li>
 				<h3>Make you a better programmer.</h3>
 			</li>
 			<li>
-				<h3>Structuring your code. You should still use patterns (prototype, modular, revlealing modular, mixin)</h3>
+				<h3>Structuring your code. You should still use patterns (prototype, modular, revealing modular, mixin)</h3>
 			</li>
 		</ul>
 	</p>
@@ -241,19 +202,9 @@
 	</div>
 	<p>
 		<ul>
-			<li>
-				<h3>Knockout is NOT for all situations</h3>
-			</li>
-			<li>
-				<h3>Model your Knockout models like you model your C# ViewModels</h3>
-			</li>
-			<li>
-				<h3>Knockout is not the only solution for writing MVVM-like JS Apps (Angular, Backbone, EmberJS)</h3>
-			</li>
-			<li>
-				<h3>Knockout is just a library built to do you one specific thing</h3>
-			</li>
-			<li><h3>Ready the docs, ask questions and write code on your own.</h3></li>
+			<li><h3>Knockout is NOT for all situations</h3></li>
+			<li><h3>Knockout is not the only solution for writing MVVM-like JS Apps (Angular, Backbone, EmberJS)</h3></li>
+			<li><h3>Read the docs, ask questions and write code on your own.</h3></li>
 		</ul>
 	</p>
 	<a href="#top" data-scroll-to="#bottom-line">More</a>
