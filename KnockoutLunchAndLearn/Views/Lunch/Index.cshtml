@@ -1,0 +1,460 @@
+﻿@{
+	ViewBag.Title = "Lunch And Learn";
+}
+<div class="row" style="margin-bottom: 500px;">
+	<div class="jumbotron" id="top">
+		<h1>What is Knockoutjs?</h1>
+		<p>Knockout is a JavaScript library which helps connect JavaScript to HTML.</p>
+		<p><a class="btn btn-primary btn-lg" role="button" href="http://knockoutjs.com">Learn more</a></p>
+	</div>
+	<ul>
+		<li><h2>Knockout is Javascript</h2></li>
+		<li><h2>Knockout is a publisher subscriber system</h2></li>
+		<li><h2>Knockout is cross browser (IE 6+, Firefox 2+, Chrome, Opera, Safari)</h2></li>
+		<li><h2>Knockout is AMD complient</h2></li>
+		<li><h2>Knockout is extensible (<a href="http://knockoutjs.com/documentation/custom-bindings.html">custom binding handlers</a>, <a href="http://knockoutjs.com/documentation/extenders.html">extenders</a>, <a href="http://knockoutjs.com/documentation/fn.html">fn</a>)</h2></li>
+	</ul>
+	<a href="#more" data-scroll-to="#more">More</a>
+</div>
+<div class="row" style="margin-bottom: 500px;">
+	<div id="more">
+		<div class="jumbotron">
+			<h1>When to use Knockoutjs?</h1>
+			<p>
+
+			</p>
+			<p><a class="btn btn-primary btn-lg" role="button" href="http://knockoutjs.com">Learn more</a></p>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">Don't use Knockout</div>
+		<div class="panel-body" id="dont-use">
+			<form role="form">
+				<div class="form-group">
+					<label for="exampleInputEmail1">Email address</label>
+					<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+				</div>
+				<div class="form-group">
+					<label for="exampleInputPassword1">Password</label>
+					<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+				</div>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox"> Check me out
+					</label>
+				</div>
+				<button type="submit" class="btn btn-default">Submit</button>
+			</form>
+		</div>
+	</div>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">You can use Knockout</div>
+		<div class="panel-body" id="can-use">
+			<div class="row">
+				<div class="col-lg-8">
+					<table class="table table-bordered table-striped table-hover">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Description</th>
+								<th>Developers</th>
+								<th>Is Team Full?</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody data-bind="foreach: projects">
+							<tr>
+								<td data-bind="text: name"></td>
+								<td data-bind="text: description"></td>
+								<td data-bind="text: developerText"></td>
+								<td>
+									<input type="checkbox" data-bind="checked: isFull" />
+								</td>
+								<td>
+									<button class="btn btn-primary btn-xs" data-bind="click: $parent.EditProject" data-toggle="modal" data-target="#edit-modal"><i class="glyphicon glyphicon-cog"></i> Edit</button>
+									<button class="btn btn-danger btn-xs" data-bind="click: $parent.RemoveProject"><i class="glyphicon glyphicon-trash"></i> Remove</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<button class="btn btn-success" data-toggle="modal" data-target="#add-modal"><i class="glyphicon glyphicon-plus"></i> Add Project</button>
+				</div>
+				<div class="col-lg-4">
+					<table class="table table-condensed table-striped" data-bind="visible: showTransactions">
+						<thead>
+							<tr>
+								<th>Type</th>
+								<th>Data</th>
+							</tr>
+						</thead>
+						<tbody data-bind="foreach: transactions">
+							<tr>
+								<td>
+									<!-- ko text: type--><!-- /ko -->
+								</td>
+								<td>
+									<!-- ko text: ko.toJSON(data)--><!-- /ko -->
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-modalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="edit-modalLabel">Edit</h4>
+						</div>
+						<!-- ko if: EditingProject -->
+						<div data-bind="with: EditingProject">
+							<form role="form" data-bind="submit: $parent.SaveProject">
+								<div class="modal-body">
+									<div class="form-group">
+										<label for="name">Name</label>
+										<input type="text" class="form-control" id="name" placeholder="Name" data-bind="value: name" />
+									</div>
+									<div class="form-group">
+										<label for="description">Description</label>
+										<input type="text" class="form-control" id="description" placeholder="Description" data-bind="value: description" />
+									</div>
+									<div class="form-group">
+										<label for="Developers">Developers</label>
+										<input type="number" class="form-control" id="developers" data-bind="value: developers, enable: !isFull()" />
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									<button type="submit" class="btn btn-primary">Save changes</button>
+								</div>
+							</form>
+						</div>
+						<!-- /ko -->
+					</div>
+				</div>
+			</div>
+
+			<div class="modal fade" id="add-modal" tabindex="-1" role="dialog" aria-labelledby="add-modalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="add-modalLabel">Add</h4>
+						</div>
+						<!-- ko if: AddingProject -->
+						<div data-bind="with: AddingProject">
+							<form role="form" data-bind="submit: $parent.AddProject">
+								<div class="modal-body">
+									<div class="form-group">
+										<label for="name">Name</label>
+										<input type="text" class="form-control" id="name" placeholder="Name" data-bind="value: name">
+									</div>
+									<div class="form-group">
+										<label for="description">Description</label>
+										<input type="text" class="form-control" id="description" placeholder="Description" data-bind="value: description">
+									</div>
+									<div class="form-group">
+										<label for="Developers">Developers</label>
+										<input type="number" class="form-control" id="developers" placeholder="developers" data-bind="value: developers">
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									<button type="submit" class="btn btn-primary">Save changes</button>
+								</div>
+							</form>
+						</div>
+						<!-- /ko -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<a href="#what" data-scroll-to="#what">More</a>
+</div>
+<div class="row" style="margin-bottom: 500px;">
+	<div id="what">
+		<div class="jumbotron">
+			<h1>What CAN Knockoutjs help me with?</h1>
+		</div>
+	</div>
+	<ul>
+		<li>
+			<h2>As a devloper</h2>
+			<ul>
+				<li><h3>An easy way keep the UI in sync with your underlying data model</h3></li>
+				<li><h3>Easy use of templates to model your data (not unique to Knockout by any means)</h3></li>
+				<li><h3>You can write custom binding handlers for specific data (numbers, dates, currency and the dereaded CKEDITOR)</h3></li>
+
+
+			</ul>
+		</li>
+	</ul>
+	<div id="binding-handlers" class="row">
+		<div class="col-md-4">
+			<input type="text" data-bind="number : number" />
+		</div>
+
+		<div class="col-md-4">
+			<input type="text" data-bind="percentage : percentage" />
+		</div>
+
+		<div class="col-md-4">
+			<input type="text" data-bind="currency : currency" />
+		</div>
+	</div>
+	<a href="#cant" data-scroll-to="#cant">More</a>
+</div>
+
+<div class="row" style="margin-bottom: 500px;">
+	<div id="cant">
+		<div class="jumbotron">
+			<h1>What CAN'T Knockoutjs help me with?</h1>
+		</div>
+	</div>
+	<p>
+		<ul>
+			<li>
+				<h3>AMD (use RequireJS, and yes it's possible and FUN!)</h3>
+			</li>
+			<li>
+				<h3>CSS - Knockout has no clue what "body : { display : none !important; }" is.</h3>
+			</li>
+			<li>
+				<h3>Make you a better programmer. Ready the docs, ask questions and write code on your own.</h3>
+			</li>
+			<li>
+				<h3>Structuring your code. You can still use any number of JS patterns (prototype, modular, revlealing modular, mixin)</h3>
+			</li>
+		</ul>
+	</p>
+	<a href="#bottom-line" data-scroll-to="#bottom-line">More</a>
+</div>
+<div class="row" style="margin-bottom: 500px;">
+	<div id="bottom-line">
+		<div class="jumbotron">
+			<h1>___________________</h1>
+		</div>
+	</div>
+	<p>
+		<ul>
+			<li>
+				<h3>Knockout is NOT for all situations</h3>
+			</li>
+			<li>
+				<h3>Model your knockout models like you model your C# ViewModels</h3>
+			</li>
+			<li>
+				<h3>Knockout is not the only solution for writing MVVM-like JS Apps (Angular, Backbone, EmberJS)</h3>
+			</li>
+			<li>
+				<h3>It's just a library built to do you one specific thing</h3>
+			</li>
+		</ul>
+	</p>
+	<a href="#top" data-scroll-to="#bottom-line">More</a>
+</div>
+@section scripts{
+
+	<script src="~/Scripts/_references.js"></script>
+	<script>
+		require.config({
+			baseUrl: "@Url.Content("~/Scripts")",
+			paths: {
+				accounting: "accounting",
+				ko: "knockout-3.0.0"
+			}
+		});
+
+		define("ViewModel", ["ko", "protectedObservable"], function (ko, protectedObservable) {
+			function ViewModel() {
+				var self = this;
+
+				self.projects = ko.observableArray([
+					new Project("Sales Process", "SAVO Sales Process Pro gives companies an edge by systematically reinforcing best practices, guiding reps and holding them accountable for outcomes at each stage of an opportunity", 7, true),
+					new Project("Sales Mobile", "With Mobile Sales Pro, materials, coaching and resources are pushed to a sales rep's mobile device for anytime, anywhere, “just-in-time” use", 3, false),
+					new Project("Atlas", "I like maps", 4, false),
+					new Project("RFP", "", 3, false),
+					new Project("Proposals", "", 3, true),
+					new Project("Sales Content", "The SAVO Sales Enablement system aligns sales, marketing and sales operations to prescribe materials, coaching, tools and experts at the right time in the buying process", 3, false),
+				]);
+
+				self.transactions = ko.observableArray();
+				self.showTransactions = ko.computed(function () {
+					return self.transactions().length > 0;
+				});
+				self.EditingProject = ko.observable();
+				self.AddingProject = ko.observable(new Project("", "", 0));
+
+				self.EditProject = function (project) {
+					self.EditingProject(project);
+				};
+				self.AddProject = function () {
+					self.AddingProject().CommitAll();
+
+					self.AddTransaction("add", self.AddingProject());
+
+					self.projects.push(self.AddingProject());
+					self.AddingProject(new Project("", "", 0));
+					$("#add-modal").modal("hide");
+				};
+				self.RemoveProject = function (project) {
+					self.projects.remove(project);
+					self.AddTransaction("remove", project);
+				};
+				self.SaveProject = function () {
+					console.log("saving project");
+					self.EditingProject().CommitAll();
+					$("#edit-modal").modal("hide");
+					self.AddTransaction("edit", self.EditingProject());
+				};
+
+				self.AddTransaction = function (type, data) {
+					self.transactions.push({ type: type, data: ko.toJS(ko.unwrap(data)) });
+				};
+			}
+
+			function Project(name, desc, devs, full) {
+				var self = this;
+
+				self.id = $.guid++;
+				self.name = ko.protectedObservable(name);
+				self.description = ko.protectedObservable(desc);
+				self.developers = ko.protectedObservable(devs);
+				self.isFull = ko.observable(full);
+				self.developerText = ko.computed(function () {
+					return self.developers().toString() + (self.isFull() ? " (Full)" : "");
+				});
+				self.CommitAll = function () {
+					self.name.commit();
+					self.description.commit();
+					self.developers.commit();
+				};
+			}
+			return ViewModel;
+		});
+
+		define("BindingHandlerViewModel", ["ko", "bhNumber", "bhCurrency", "bhPercentage"], function (ko) {
+			function BindingHandlerViewModel() {
+				var self = this;
+				self.number = ko.observable("10");
+				self.percentage = ko.observable("1000000");
+				self.currency = ko.observable("9999.23");
+			};
+			return BindingHandlerViewModel;
+		});
+
+		define("protectedObservable", ["ko"], function (ko) {
+			ko.protectedObservable = function (initialValue) {
+				//private variables
+				var _actualValue = ko.observable(initialValue),
+					_tempValue = initialValue;
+
+				//computed observable that we will return
+				var result = ko.computed({
+					//always return the actual value
+					read: function () {
+						return _actualValue();
+					},
+					//stored in a temporary spot until commit
+					write: function (newValue) {
+						_tempValue = newValue;
+					}
+				});
+
+				//if different, commit temp value
+				result.commit = function () {
+					if (_tempValue !== _actualValue()) {
+						_actualValue(_tempValue);
+					}
+				};
+
+				//force subscribers to take original
+				result.reset = function () {
+					_actualValue.valueHasMutated();
+					_tempValue = _actualValue();   //reset temp value
+				};
+
+				return result;
+			};
+		});
+
+		define("bhNumber", ["accounting", "ko"], function (accounting, ko) {
+			ko.bindingHandlers.number = {
+				init: function (element, valueAccessor, allBindingsAccessor) {
+					var $element = $(element);
+					$element.wrap("<div class='input-group input-group-lg' />");
+					$element.before("<span class='input-group-addon'>#</span>");
+					$element.addClass("form-control");
+					ko.applyBindingsToNode(element, { value: valueAccessor() });
+				},
+				update: function (element, valueAccessor) {
+					var value = ko.unwrap(valueAccessor());
+					if (value.indexOf('.') > 0) {
+						$(element).val(accounting.formatNumber(value, 2));
+					} else {
+						$(element).val(accounting.formatNumber(value));
+					}
+				}
+			};
+		});
+
+		define("bhCurrency", ["accounting", "ko"], function (accounting, ko) {
+			ko.bindingHandlers.currency = {
+				init: function (element, valueAccessor, allBindingsAccessor) {
+					var options = ko.bindingHandlers.currency.options,
+						$element = $(element);
+
+					$element.wrap("<div class='input-group input-group-lg' />");
+					$element.before("<span class='input-group-addon'>$</span>");
+					$element.addClass("form-control");
+					ko.applyBindingsToNode(element, { value: valueAccessor() });
+				},
+				update: function (element, valueAccessor) {
+					var options = ko.bindingHandlers.currency.options,
+						value = ko.unwrap(valueAccessor()),
+						formatted = accounting.formatMoney(value, options.symbol, options.precision, options.thousand, options.decimal, options.format);
+					$(element).val(formatted);
+				},
+				options: {
+					symbol: "",
+					decimal: ".",
+					thousand: ",",
+					precision: "2",
+					format: "%s%v",
+					roundToDecimalPlace: 2
+				}
+			};
+		});
+
+		define("bhPercentage", ["accounting", "ko"], function (accounting, ko) {
+			ko.bindingHandlers.percentage = {
+				init: function (element, valueAccessor, allBindingsAccessor) {
+					var $element = $(element);
+
+					$element.wrap("<div class='input-group input-group-lg' />");
+					$element.after("<span class='input-group-addon'>%</span>");
+					$element.addClass("form-control");
+					ko.applyBindingsToNode(element, { value: valueAccessor() });
+				},
+				update: function (element, valueAccessor) {
+					var value = ko.unwrap(valueAccessor());
+					if (value.indexOf('.') > 0) {
+						$(element).val(accounting.formatNumber(value, 2));
+					} else {
+						$(element).val(accounting.formatNumber(value));
+					}
+				}
+			};
+		});
+	
+		require(["ko", "ViewModel", "BindingHandlerViewModel"], function (ko, ViewModel, BindingHandlerViewModel) {
+			ko.applyBindings(new ViewModel(), document.getElementById("can-use"));
+			ko.applyBindings(new BindingHandlerViewModel(), document.getElementById("binding-handlers"));
+		});
+
+	</script>
+}

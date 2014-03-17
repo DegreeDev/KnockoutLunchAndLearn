@@ -1,0 +1,187 @@
+﻿@{
+	ViewBag.Title = "Index";
+}<br />
+<div class="container-fluid">
+	<div class="row">
+		<button class="btn btn-primary pull-right">Opportunity </button>
+		<h2>Opportunity Dashboard</h2>
+	</div>
+	<div class="row">
+		<div class="col-lg-3">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					Total Revenue : $2,000,000
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-body">
+					Total Revenue : $2,000,000
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-body">
+					Total Revenue : $2,000,000
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-3">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					Total Margin : $2,000,000
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-body">
+					Total Margin : $2,000,000
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-body">
+					Total Margin : $2,000,000
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-3">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					Avg. deal size : $2,000
+				</div>
+			</div>
+
+		</div>
+		<div class="col-lg-3">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					Total Revenue : $2,000,000
+				</div>
+			</div>
+		</div>
+	</div>
+	<h3>Open Opportunityes (122)</h3>
+	<div data-bind="foreachGrouped: { data: processes, count: count }">
+		<div class="row" data-bind="foreach: $data">
+			<div class="col-lg-4">
+				<div class="panel panel-default">
+					<div class="panel-body" data-click='holder' data-bind="template: template">
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12 holder">
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+@section scripts{
+	<script type="text/html" id="process-template">
+		<i class="glyphicon glyphicon-bullhorn pull-right"></i>
+		<h2 data-bind="text: name"></h2>
+		<h3>
+			<i class="glyphicon glyphicon-stats">
+				<span data-bind="text: account"></span>
+			</i>
+		</h3>
+	</script>
+	<script type="text/html" id="lead-template">
+		<h2 data-bind="text: name"></h2>
+		<h3 data-bind="text: currentStage"></h3>
+	</script>
+	<script>
+		function Process() {
+			var self = this;
+
+			self.id = "";
+			self.name = "";
+			self.account = "";
+			self.currentStage = "";
+			self.currentStageCompletionPercentage = 0;
+			self.notificationCount = 0;
+			self.template = "";
+
+		}
+
+		function ViewModel() {
+			var self = this;
+			self.processes = ko.observable();
+			self.count = ko.observable(3);
+		}
+
+
+		var viewModel = ko.mapping.fromJS({
+			processes: [
+				{ id: 1, account: "Med Start", name: "Matt's Opportunity", currentStage: 1, currentStageCompletionPrecentage: 10, notificationCount: 2, template: 'process-template' },
+				{ id: 1, account: "Test Account", name: "Matt's Opportunity", currentStage: 1, currentStageCompletionPrecentage: 10, notificationCount: 2, template: 'process-template' },
+				{ id: 1, account: "Savo", name: "Matt's Opportunity", currentStage: 1, currentStageCompletionPrecentage: 10, notificationCount: 2, template: 'process-template' },
+				{ id: 1, account: "Windy City Wire", name: "Matt's Opportunity", currentStage: 1, currentStageCompletionPrecentage: 10, notificationCount: 2, template: 'process-template' },
+				{ id: 1, account: "Med Start", name: "Matt's Opportunity", currentStage: 1, currentStageCompletionPrecentage: 10, notificationCount: 2, template: 'process-template' },
+				{ id: 1, account: "Test Account", name: "Matt's Opportunity", currentStage: 1, currentStageCompletionPrecentage: 10, notificationCount: 2, template: 'process-template' },
+				{ id: 1, account: "Savo", name: "Matt's Opportunity", currentStage: 1, currentStageCompletionPrecentage: 10, notificationCount: 2, template: 'process-template' },
+				{ id: 1, account: "Med Start", name: "Matt's Opportunity", currentStage: 1, currentStageCompletionPrecentage: 10, notificationCount: 2, template: 'process-template' },
+				{ id: 1, account: "Test Account", name: "Matt's Opportunity", currentStage: 1, currentStageCompletionPrecentage: 10, notificationCount: 2, template: 'process-template' },
+				{ id: 1, account: "Savo", name: "Matt's Opportunity", currentStage: 1, currentStageCompletionPrecentage: 10, notificationCount: 2, template: 'process-template' },
+				{ id: 1, account: "Med Start", name: "Matt's Opportunity", currentStage: 1, currentStageCompletionPrecentage: 10, notificationCount: 2, template: 'process-template' },
+				{ id: 1, account: "Test Account", name: "Matt's Opportunity", currentStage: 1, currentStageCompletionPrecentage: 10, notificationCount: 2, template: 'process-template' },
+				{ id: 1, account: "Savo", name: "Matt's Opportunity", currentStage: 1, currentStageCompletionPrecentage: 10, notificationCount: 2, template: 'lead-template' },
+				{ id: 1, account: "Windy City Wire", name: "Matt's Opportunity", currentStage: 1, currentStageCompletionPrecentage: 10, notificationCount: 2, template: 'lead-template' },
+				{ id: 1, account: "Windy City Wire", name: "Matt's Opportunity", currentStage: 1, currentStageCompletionPrecentage: 10, notificationCount: 2, template: 'lead-template' },
+				{ id: 1, account: "Windy City Wire", name: "Matt's Opportunity", currentStage: 1, currentStageCompletionPrecentage: 10, notificationCount: 2, template: 'lead-template' },
+				{ id: 1, account: "Microsoft", name: "Matt's Opportunity", currentStage: 1, currentStageCompletionPrecentage: 10, notificationCount: 2, template: 'lead-template' }
+			],
+			count: 3
+		});
+
+		ko.bindingHandlers.foreachGrouped = {
+			init: function (element, valueAccessor) {
+				var groupedItems,
+					options = valueAccessor();
+
+				//create our own computed that transforms the flat array into rows/columns
+				groupedItems = ko.computed({
+					read: function () {
+						var index, length, group,
+							result = [],
+							count = +ko.utils.unwrapObservable(options.count) || 1,
+							items = ko.utils.unwrapObservable(options.data);
+						//create an array of arrays (rows/columns)
+						for (index = 0, length = items.length; index < length; index++) {
+							if (index % count === 0) {
+								group = [];
+								result.push(group);
+							}
+							group.push(items[index]);
+						}
+						return result;
+					},
+					disposeWhenNodeIsRemoved: element
+				});
+
+				//use the normal foreach binding with our new computed
+				ko.applyBindingsToNode(element, { foreach: groupedItems });
+
+				//make sure that the children of this element are not bound
+				return { controlsDescendantBindings: true };
+			}
+		};
+
+		ko.applyBindings(viewModel);
+
+		$("[data-click='holder']").each(function (index, element) {
+			$(element).on("click", function () {
+				console.log("clicked");
+				var data = ko.dataFor(element),
+				holder = $(element).nextAll(".holder");
+
+				console.log(ko.toJSON(data));
+
+				holder.addClass("well");
+
+				holder.append(data.id);
+			});
+		});
+	</script>
+}
