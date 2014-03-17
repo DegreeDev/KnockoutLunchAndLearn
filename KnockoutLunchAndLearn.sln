@@ -6,8 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnockoutLunchAndLearn", "KnockoutLunchAndLearn\KnockoutLunchAndLearn.csproj", "{94460F51-D3C1-4EB4-94AA-7D937E050486}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{13E62790-506C-4EAF-8B91-15436478EA12}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget (2)", ".nuget (2)", "{4FF411D8-A6A1-4176-807C-0792D1F12A84}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
