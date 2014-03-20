@@ -26,50 +26,47 @@
 	<div class="panel panel-default">
 		<div class="panel-body" id="can-use">
 			<div class="row">
-				<div class="col-lg-8">
-					<table class="table table-bordered table-striped table-hover">
-						<thead>
-							<tr>
-								<th>Name</th>
-								<th>Description</th>
-								<th>Developers</th>
-								<th>Is Team Full?</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody data-bind="foreach: projects">
-							<tr>
-								<td data-bind="text: name"></td>
-								<td data-bind="text: description"></td>
-								<td data-bind="text: developerText"></td>
-								<td><input type="checkbox" data-bind="checked: isFull" /></td>
-								<td>
-									<button class="btn btn-primary btn-xs" data-bind="click: $parent.EditProject" data-toggle="modal" data-target="#edit-modal"><i class="glyphicon glyphicon-cog"></i> Edit</button>
-									<button class="btn btn-danger btn-xs" data-bind="click: $parent.RemoveProject"><i class="glyphicon glyphicon-trash"></i> Remove</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					<button class="btn btn-success" data-toggle="modal" data-target="#add-modal"><i class="glyphicon glyphicon-plus"></i> Add Project</button>
-				</div>
-				<div class="col-lg-4">
-					<table class="table table-condensed table-striped" data-bind="visible: showTransactions">
-						<thead>
-							<tr>
-								<th>Type</th>
-								<th>Data</th>
-							</tr>
-						</thead>
-						<tbody data-bind="foreach: transactions">
-							<tr>
-								<td><!-- ko text: type--><!-- /ko --></td>
-								<td><!-- ko text: ko.toJSON(data)--><!-- /ko --></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+				<table class="table table-bordered table-striped table-hover">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Description</th>
+							<th>Developers</th>
+							<th>Is Team Full?</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody data-bind="foreach: projects">
+						<tr>
+							<td data-bind="text: name"></td>
+							<td data-bind="text: description"></td>
+							<td data-bind="text: developerText"></td>
+							<td><input type="checkbox" data-bind="checked: isFull" /></td>
+							<td>
+								<button class="btn btn-primary btn-xs" data-bind="click: $parent.EditProject" data-toggle="modal" data-target="#edit-modal"><i class="glyphicon glyphicon-cog"></i> Edit</button>
+								<button class="btn btn-danger btn-xs" data-bind="click: $parent.RemoveProject"><i class="glyphicon glyphicon-trash"></i> Remove</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<button class="btn btn-success" data-toggle="modal" data-target="#add-modal"><i class="glyphicon glyphicon-plus"></i> Add Project</button>
 			</div>
-
+			<div class="row">
+				<table class="table table-condensed table-striped" data-bind="visible: showTransactions">
+					<thead>
+						<tr>
+							<th>Type</th>
+							<th>Data</th>
+						</tr>
+					</thead>
+					<tbody data-bind="foreach: transactions">
+						<tr>
+							<td><!-- ko text: type--><!-- /ko --></td>
+							<td><!-- ko text: ko.toJSON(data)--><!-- /ko --></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 			<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-modalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -146,38 +143,6 @@
 	</div>
 	<a href="#cant">More</a>
 </div>
-@*<div class="row" style="margin-bottom: 500px;">
-	<div id="what">
-		<div class="jumbotron">
-			<h1>What CAN Knockoutjs help me with?</h1>
-		</div>
-	</div>
-	<ul>
-		<li>
-			<h2>As a developer</h2>
-			<ul>
-				<li><h3>An easy way keep the UI in sync with your underlying data model</h3></li>
-				<li><h3>Easy use of templates to model your data (not unique to Knockout by any means)</h3></li>
-				<li><h3>You can write custom binding handlers for specific data (numbers, dates, currency and the dreaded CKEDITOR)</h3></li>
-			</ul>
-		</li>
-	</ul>
-	<div id="binding-handlers" class="row">
-		<div class="col-md-4">
-			<input type="text" data-bind="number : number" />
-		</div>
-
-		<div class="col-md-4">
-			<input type="text" data-bind="percentage : percentage" />
-		</div>
-
-		<div class="col-md-4">
-			<input type="text" data-bind="currency : currency" />
-		</div>
-	</div>
-	<a href="#cant" data-scroll-to="#cant">More</a>
-</div>*@
-
 <div class="row" style="margin-bottom: 500px;">
 	<div id="cant">
 		<div class="jumbotron">
@@ -205,9 +170,9 @@
 	<p>
 		<ul>
 			<li><h3>Knockout is NOT for all situations</h3></li>
-			<li><h3>Knockout is not the only solution for writing MVVM-like JS Apps (Angular, Backbone, EmberJS)</h3></li>
+			<li><h3>Knockout is not the only solution for writing interactive web applications (Angular, Backbone, EmberJS)</h3></li>
 			<li><h3>Read the docs, ask questions and write code on your own.</h3></li>
-			
+
 		</ul>
 	</p>
 	<a href="#top" data-scroll-to="#bottom-line">More</a>
@@ -405,7 +370,7 @@
 				}
 			};
 		});
-	
+
 		require(["ko", "ViewModel", "BindingHandlerViewModel"], function (ko, ViewModel, BindingHandlerViewModel) {
 			ko.applyBindings(new ViewModel(), document.getElementById("can-use"));
 			ko.applyBindings(new BindingHandlerViewModel(), document.getElementById("binding-handlers"));
