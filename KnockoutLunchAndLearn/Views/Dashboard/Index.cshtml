@@ -57,7 +57,7 @@
 			</div>
 		</div>
 	</div>
-	<h3>Open Opportunityes (122)</h3>
+	<h3>Open Opportunities (122)</h3>
 	<div data-bind="foreachGrouped: { data: processes, count: count }">
 		<div class="row" data-bind="foreach: $data">
 			<div class="col-lg-4">
@@ -102,7 +102,7 @@
 			self.currentStageCompletionPercentage = 0;
 			self.notificationCount = 0;
 			self.template = "";
-
+		
 		}
 
 		function ViewModel() {
@@ -155,7 +155,10 @@
 							}
 							group.push(items[index]);
 						}
-						return result;
+						return {
+							items: result,
+							rowId : $.guid++
+						};
 					},
 					disposeWhenNodeIsRemoved: element
 				});

@@ -50,6 +50,9 @@
 				 <li class="@(Model == "Form" ? "active" : "")">
                     <a href="@Url.Action("Form")">Using Forms</a>
                 </li>
+				<li class="@(Model == "Lunch" ? "active" : "")">
+					<a href="@Url.Action("Index", "Lunch", new { })">Lunch and Learn</a>
+				</li>
             </ul>
         </div>
     </nav>
