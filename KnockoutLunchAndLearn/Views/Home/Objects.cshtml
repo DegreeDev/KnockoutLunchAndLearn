@@ -6,62 +6,18 @@
 <h2>Objects and Arrays</h2>
 
 <h4>Defining Objects / Arrays in JavaScript</h4>
-<pre>
-	var obj = {};			//best
-	var obj = new Object();		//just don't do
 
-	var array = [];			//best
-	var array = new Array();	//just don't do
-
-	var obj = { name : "matt" };
-	var array = [ "matt", "eric" ]; 
-	var objArray = [ { name : "matt" }, { name : "eric } ]; 
-
-	//Accessing
-	var obj = { name : "matt" };  
-		//obj.name => matt
-	
-	var array = [ "matt", "eric" ];  
-		//array[0] => matt array[1] => eric
-	
-	var objArray = [ { name : "matt" }, { name : "eric } ]; 
-		//array[0].name => matt
-
-	--Complicated Examples--
-
-	var data = {
-		person : {
-			name : "Matt",
-			languages : [ "C#", "JavaScript"],
-			jobs : [
-				{ location : "Windy City Wire", years : 2 },
-				{ location : "The Savo Group", years: 1 }
-			]
-		}
-	};
-
-	//data.person.jobs[0].location => Windy City Wire
-	or 
-	//data["person"]["jobs"][0]["location"] => Windy City Wire
-</pre>
+<script src="https://gist.github.com/DegreeDev/9c0ec549204e063a6695.js"></script>
 
 <h4>Setting Up Objects</h4>
 <p>In general there are two ways to set value on an object</p>
-<pre>
-var obj = {}; 
-
--Dot Notation
-obj.name = "Matthew"  
-
--Property Notation
-obj["name"] = "Matthew"
-</pre>
+<script src="https://gist.github.com/DegreeDev/6fa73ac1f23848996ad1.js"></script>
 
 <h4>Why would you ever use property notation?</h4>
 <a href="https://github.com/DegreeDev/Registrar/blob/master/registrar.js">The _setApp function in Registrar</a>
 
 <h2>In Action:</h2>
-	<div class="row">
+<div class="row">
 	<div class="col-md-6">
 		<h4>View Model 1</h4>
 		<div id="ViewModel1">
@@ -109,10 +65,8 @@ obj["name"] = "Matthew"
 		<pre>
 function ViewModel1() {
 	var self = this;
-
 	self.name = ko.observable();
 	self.names = ko.observableArray();
-
 	self.AddName = function () {
 		self.names.push(self.name());
 		self.name("");
@@ -127,10 +81,8 @@ function ViewModel1() {
 		<pre>
 var ViewModel2 = function () {
 	var self = this;
-
 	self.name = ko.observable();
 	self.names = ko.observableArray();
-
 	self.AddName = function () {
 		self.names.push(self.name());
 		self.name("");

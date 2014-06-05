@@ -1,0 +1,10 @@
+﻿.link-panel{
+	float:right;
+	background-color: #eee;
+	border: 1px solid #ddd;
+	border-radius:3px;
+	padding:0 5px 10px 5px;
+}
+.answer {
+	margin-left: 30px;
+}

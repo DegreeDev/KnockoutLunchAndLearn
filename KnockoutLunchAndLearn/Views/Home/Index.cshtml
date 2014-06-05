@@ -1,17 +1,69 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+	ViewBag.Title = "Home Page";
 }
 @Html.Partial("_Navigation", "Index")
+<div class="row">
+	<h2>
+		What is Knockout?
+	</h2>
+	<p>
+		Knockout is a JavaScript library that helps you to create rich, responsive display and editor user interfaces with a clean underlying data model. Any time you have sections of UI that update dynamically (e.g., changing depending on the user’s actions or when an external data source changes), KO can help you implement it more simply and maintainably.
+		<small><em>Take from the<a href="http://knockoutjs.com/documentation/introduction.html"> knockout introduction</a>.</em></small>
+	</p>
+</div>
 
-<h3>Knockout Links: </h3>
-<ul>
-    <li><a href="http://knockoutjs.com/">Knockout Website</a></li>
-    <li><a href="http://blog.stevensanderson.com/">Steve Sanderson's Blog</a></li>
-    <li><a href="http://www.knockmeout.net/">Ryan Niemeyer</a></li>
-</ul>
+<div class="row">
+	<div class="col-lg-6 col-md-6">
+		<h4>This being said.</h4>
+		<div class="answer">
+			<b>What features does it provide me?</b>
+			<ul>
+				<li>A binding syntax to link JavasSript to HTML elements</li>
+				<li>Observable properties (object and array)</li>
+				<li>Computed properties (object and array)</li>
+				<li>Custom Binding Handlers</li>
+				<li>Extensibility (computed, observable and observableArrays)</li>
+				<li>Templates</li>
+				<li>JSON serialization</li>
+				<li>Dynamic Object Mapping (mapping plugin)</li>
+			</ul>
+			<b>Why should I use it?</b>
+			<ul>
+				<li>You shouldn't for all situations</li>
+				<li>It helps bring consistency to your UI though the use of binding handlers</li>
+				<li>It plays nicely with any other library</li>
+				<li>Using Knockout is not an all in situation</li>
+				<li>You can use Knockout AND form submit (?!?!?! but JAVASCRIPT IS AJAX!!)</li>
+				<li>100% client side</li>
+			</ul>
+			<b>What are the alternatives?</b>
+			<ul>
+				<li>No client framework</li>
+				<li>Roll your own</li>
+				<li>JavaScript</li>
+				<li><a href="http://emberjs.com">Ember</a></li>
+				<li><a href="https://angularjs.org/">Angular</a></li>
+				<li><a href="http://backbonejs.org/">Backbone</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="col-lg-6 col-md-6">
+		<div class="link-panel">
+			<h4>Knockout Links: </h4>
+			<ul>
+				<li><a href="http://knockoutjs.com/">Knockout Website</a></li>
+				<li><a href="http://blog.stevensanderson.com/">Steve Sanderson's Blog</a></li>
+				<li><a href="http://www.knockmeout.net/">Ryan Niemeyer</a></li>
+			</ul>
 
-<h3>General JavaScript: </h3>
-<ul>
-    <li><a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/">Essential JS Design Patterns</a></li>
-    <li><a href="http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html">Modular Pattern</a></li>
-</ul>
+			<h4>General JavaScript: </h4>
+			<ul>
+				<li><a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/">Essential JS Design Patterns</a></li>
+				<li><a href="http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html">Modular Pattern</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+
+

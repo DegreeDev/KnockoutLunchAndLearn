@@ -6,26 +6,15 @@
 <p>When applying the bindings ( and in knockout in general )  you are using the element not the jQuery selector</p>
 <p>Bindings should be the last thing you do. All of the object that you need should already be on the page and ready to be set up. </p>
 
-<pre>
-ko.applyBindings(new ViewModel());                  //Generic
-ko.applyBindings(new ViewModel(), $("#id").get(0)); //Specific(Slower)
-ko.applyBindings(new ViewModel(), $("#id")[0]);     //Specifc (Faster)
-</pre>
-
+<script src="https://gist.github.com/DegreeDev/6950c3fffea137cf5e62.js"></script>
 <p>
-    This applys bindings to the entire page. In general I suggest not using this becuase it limits the use of knockout for other people who may live on your page. 
+    This applies bindings to the entire page. In general I suggest not using this because it limits the use of knockout for other people who may live on your page. 
     An example of this in SPP is that we have a "Notification Center" which is bound with knockout. This appears on multiple pages. If an ko app binds to the entire page
     this Notification center cannot do it's binding. 
 </p>
 
 
-<pre>
-ko.applyBindings(new ViewModel(), $("#my-element")[0]);
-ko.applyBindings(new ViewModel(), $("#notification-center")[0]);
-< div id="notification-center">< /div>
-< div id="my-element">< /div>
-
-</pre>
+<script src="https://gist.github.com/DegreeDev/76938b4d3b5306f858d8.js"></script>
 
 <p>
     This allows both ko contexts to live on the same page and not conflict with each other. 

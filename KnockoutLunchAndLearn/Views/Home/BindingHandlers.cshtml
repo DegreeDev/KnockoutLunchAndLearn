@@ -15,36 +15,8 @@
 <p>But there are certain situations where you need to deal with 3rd party libraries. Because Knockout takes elements in and out of the DOM and know when something has changed on an object, a binding handler must handle two general situations, init and update.</p>
 
 <h4>Example: </h4>
+<script src="https://gist.github.com/DegreeDev/927e6859c66bbb400087.js"></script>
 
-<pre>
-ko.bindingHandlers.clickBox = {
-	init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
-		var $element = $(element),
-			observable = valueAccessor(),
-			enable = allBindingsAccessor().enabled || true,
-			action = allBindingsAccessor().action,
-			remove = allBindingsAccessor().remove,
-			name = allBindingsAccessor().actionName,
-			$button = $("<button class='btn btn-default' type='button '/>"),
-			$remove = $("<button class='btn btn-danger' type='button'/>"),
-			$span = $("<span class='input-group-btn' />");
-
-		$element.wrap("<div class='input-group' />");
-		$element.after($span);
-		$remove.text("Remove");
-		$element.addClass("form-control");
-		$span.append($button).append($remove);
-					
-
-		ko.applyBindingsToNode($button[0], { click: action, text: name });
-		ko.applyBindingsToNode($remove[0], { click: function () { remove(ko.dataFor(element)); } });
-		ko.applyBindingsToNode(element, { value: observable });
-	},
-	update: function (element, valueAccessor, allBindingsAccessor, viewModel) {
-
-	}
-}
-</pre>
 <h4>In Action:</h4>
 <pre>
 	<button class="btn" data-bind="click: AddThing">Add</button>

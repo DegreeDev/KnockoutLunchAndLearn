@@ -48,7 +48,8 @@ namespace KnockoutLunchAndLearn
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
-                "~/Content/bootstrap-theme.css"
+                "~/Content/bootstrap-theme.css",
+				"~/Content/app.css"
             ));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
