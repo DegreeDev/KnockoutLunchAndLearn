@@ -382,6 +382,7 @@
     <Content Include="Views\Lunch\Index.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Home\BindingContext.cshtml" />
+    <Content Include="Views\Home\Mapping.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

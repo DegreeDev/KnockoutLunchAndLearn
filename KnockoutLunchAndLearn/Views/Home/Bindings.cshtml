@@ -2,20 +2,22 @@
     ViewBag.Title = "Bindings";
 }
 @Html.Partial("_Navigation", "Bindings")
-<h2>The Binding Context</h2>
-<p>When applying the bindings ( and in knockout in general )  you are using the element not the jQuery selector</p>
-<p>Bindings should be the last thing you do. All of the object that you need should already be on the page and ready to be set up. </p>
+<div class="col-lg-9">
+    <h2>The Binding Context</h2>
+    <p>When applying the bindings ( and in knockout in general )  you are using the element not the jQuery selector</p>
+    <p>Bindings should be the last thing you do. All of the object that you need should already be on the page and ready to be set up. </p>
 
-<script src="https://gist.github.com/DegreeDev/6950c3fffea137cf5e62.js"></script>
-<p>
-    This applies bindings to the entire page. In general I suggest not using this because it limits the use of knockout for other people who may live on your page. 
-    An example of this in SPP is that we have a "Notification Center" which is bound with knockout. This appears on multiple pages. If an ko app binds to the entire page
-    this Notification center cannot do it's binding. 
-</p>
+    <script src="https://gist.github.com/DegreeDev/6950c3fffea137cf5e62.js"></script>
+    <p>
+        This applies bindings to the entire page. In general I suggest not using this because it limits the use of knockout for other people who may live on your page.
+        An example of this in SPP is that we have a "Notification Center" which is bound with knockout. This appears on multiple pages. If an ko app binds to the entire page
+        this Notification center cannot do it's binding.
+    </p>
 
 
-<script src="https://gist.github.com/DegreeDev/76938b4d3b5306f858d8.js"></script>
+    <script src="https://gist.github.com/DegreeDev/76938b4d3b5306f858d8.js"></script>
 
-<p>
-    This allows both ko contexts to live on the same page and not conflict with each other. 
-</p>
+    <p>
+        This allows both ko contexts to live on the same page and not conflict with each other.
+    </p>
+</div>

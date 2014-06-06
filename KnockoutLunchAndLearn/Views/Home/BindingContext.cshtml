@@ -2,47 +2,49 @@
     ViewBag.Title = "BindingContext";
 }
 @Html.Partial("_Navigation", "BindingContext")
-<h2>The Binding Context</h2>
+<div class="col-lg-9">
+    <h2>The Binding Context</h2>
 
-<p>Keeping the context in mind while you are writing the html bindings is a very importnant part of KnockoutJS.</p>
-<h4>Example:</h4>
+    <p>Keeping the context in mind while you are writing the html bindings is a very importnant part of KnockoutJS.</p>
+    <h4>Example:</h4>
 
 
-<div data-bind="with: book" class="panel panel-default">
-    <div class="panel-body">
-        <label>Author:<input type='text' data-bind="value: author" /></label>
-        <label data-bind="text: $root.randomViewModelProperty"></label>
-        <button class="btn btn-primary" data-bind="click: AddChapter">Add Chapter</button>
-        <!-- ko foreach: chapters -->
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <!-- ko text: title -->
-                <!-- /ko -->
-                <a class="" data-bind="click: $parent.RemoveChapter" href="#">Remove Chapter</a>
-            </div>
-            <div class="panel-body">
-                <label>
-                    Title:
-            <input type="text" data-bind="value: title" /></label>
-                <button class="btn btn-primary" data-bind="click: AddPage">Add Page</button>
-                <!-- ko foreach: pages -->
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <!-- ko text: $parent.title -->
-                        <!-- /ko -->
-                        <a class="btn btn-link" data-bind="click: $parent.RemovePage">Remove Page</a>
-                    </div>
-                    <div class="panel-body">
-                        <textarea data-bind="value: content"></textarea>
-                    </div>
+    <div data-bind="with: book" class="panel panel-default">
+        <div class="panel-body">
+            <label>Author:<input type='text' data-bind="value: author" /></label>
+            <label data-bind="text: $root.randomViewModelProperty"></label>
+            <button class="btn btn-primary" data-bind="click: AddChapter">Add Chapter</button>
+            <!-- ko foreach: chapters -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <!-- ko text: title -->
+                    <!-- /ko -->
+                    <a class="" data-bind="click: $parent.RemoveChapter" href="#">Remove Chapter</a>
                 </div>
-                <!-- /ko -->
+                <div class="panel-body">
+                    <label>
+                        Title:
+                        <input type="text" data-bind="value: title" />
+                    </label>
+                    <button class="btn btn-primary" data-bind="click: AddPage">Add Page</button>
+                    <!-- ko foreach: pages -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <!-- ko text: $parent.title -->
+                            <!-- /ko -->
+                            <a class="btn btn-link" data-bind="click: $parent.RemovePage">Remove Page</a>
+                        </div>
+                        <div class="panel-body">
+                            <textarea data-bind="value: content"></textarea>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </div>
             </div>
+            <!-- /ko -->
         </div>
-        <!-- /ko -->
     </div>
 </div>
-
 @section scripts {
     <script>
         r("main", function () {

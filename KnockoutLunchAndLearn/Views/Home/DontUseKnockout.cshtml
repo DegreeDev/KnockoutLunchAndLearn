@@ -1,84 +1,86 @@
 ﻿@model KnockoutLunchAndLearn.Models.SimpleFormModel
 
 @{
-	ViewBag.Title = "DontUseKnockout";
+    ViewBag.Title = "DontUseKnockout";
 }
 @Html.Partial("_Navigation", "DontUseKnockout")
+<div class="col-lg-9">
+    <h4>Understanding how a form post works is a very important part about deciding when to use Knockout.</h4>
+    <p>For starters here is standard login form:</p>
+    <script src="https://gist.github.com/DegreeDev/dfb00460ae60857f8f9a.js"></script>
+    <p>When this gets serialized it will go through the model binder and it will figure out how to handle it. In this case it will match these routes </p>
 
-<h4>Understanding how a form post works is a very important part about deciding when to use Knockout.</h4>
-<p>For starters here is standard login form:</p>
-<script src="https://gist.github.com/DegreeDev/dfb00460ae60857f8f9a.js"></script>
-<p>When this gets serialized it will go through the model binder and it will figure out how to handle it. In this case it will match these routes </p>
+    <script src="https://gist.github.com/DegreeDev/c3a6b3feb18600138558.js"></script>
 
-<script src="https://gist.github.com/DegreeDev/c3a6b3feb18600138558.js"></script>
+    <h4>What does this have to do with Knockout?</h4>
+    <p>Frankly nothing, but remember that Knockout simply binds JavaScript to HTML. So by that logic if you have something you want an interactive form you can use Knockout to help you. </p>
+    <p>Check out the markup. The form is controlled with knockout, but at the same time just submits a form, just like an plain HTML form.</p>
+    <h4>Example:</h4>
+    <script src="https://gist.github.com/DegreeDev/6e9b51273684fc1355e3.js"></script>
+    <form method="post" action="@Url.Action("DontUseKnockout", "Home")" id="login-form">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="Name" id="name" data-bind="value: username" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="Password" id="password" data-bind="value: password" class="form-control" />
+        </div>
+        <div class="checkbox">
+            <label for="single-sign-on">
+                <input type="checkbox" data-bind="checked: singleSignOnEnabled" id="single-sign-on" />
+                Enable Single Sign On?
+            </label>
+        </div>
+        <div class="form-group">
+            <!-- ko if: singleSignOnEnabled -->
+            <label for="single-sign-on-spare-key">Spare Key</label>
+            <input type="text" name="SpareKey" data-bind="value: spareKey" id="single-sign-on-spare-key" class="form-control" />
+            <!-- /ko -->
+        </div>
+        <button class="btn btn-primary" type="submit">Login</button>
+    </form>
 
-<h4>What does this have to do with Knockout?</h4>
-<p>Frankly nothing, but remember that Knockout simply binds JavaScript to HTML. So by that logic if you have something you want an interactive form you can use Knockout to help you. </p>
-<p>Check out the markup. The form is controlled with knockout, but at the same time just submits a form, just like an plain HTML form.</p>
-<h4>Example:</h4>
-<form method="post" action="@Url.Action("DontUseKnockout", "Home")" id="login-form">
-	<div class="form-group">
-		<label for="name">Name</label>
-		<input type="text" name="Name" id="name" data-bind="value: username" class="form-control" />
-	</div>
-	<div class="form-group">
-		<label for="password">Password</label>
-		<input type="password" name="Password" id="password" data-bind="value: password" class="form-control" />
-	</div>
-	<div class="checkbox">
-		<label for="single-sign-on">
-			<input type="checkbox" data-bind="checked: singleSignOnEnabled" id="single-sign-on" />
-			Enable Single Sign On?
-		</label>
-	</div>
-	<div class="form-group">
-		<!-- ko if: singleSignOnEnabled -->
-		<label for="single-sign-on-spare-key">Spare Key</label>
-		<input type="text" name="SpareKey" data-bind="value: spareKey" id="single-sign-on-spare-key" class="form-control" />
-		<!-- /ko -->
-	</div>
-	<button class="btn btn-primary" type="submit">Login</button>
-</form>
+    @section scripts {
+        <script>
+        	 function ViewModel() {
+        	 	 var self = this;
+        	 	 self.username = ko.observable();
+        	 	 self.password = ko.observable();
+        	 	 self.singleSignOnEnabled = ko.observable(false);
+        	 	 self.spareKey = ko.observable();
 
-@section scripts {
-	<script>
-		function ViewModel(){
-			var self = this; 
-			self.username = ko.observable(); 
-			self.password = ko.observable(); 
-			self.singleSignOnEnabled = ko.observable(false); 
-			self.spareKey = ko.observable(); 
+        	 	 ko.computed(function () {
+        	 	 	 if (!self.singleSignOnEnabled()) {
+        	 	 	 	 self.spareKey("");
+        	 	 	 }
+        	 	 });
+        	 }
+        	 ko.applyBindings(new ViewModel(), $("#login-form")[0]);
+        </script>
+    }
 
-			ko.computed(function(){
-				if(!self.singleSignOnEnabled()){
-					self.spareKey("");
-				}
-			});
-		}
-		ko.applyBindings(new ViewModel(), $("#login-form")[0]);
-	</script>
-}
+    <hr />
 
-<hr/>
+	 <h3>A form with no interaction</h3>
+    <p>There is no need to use Knockout if you don't have an interactive form such as the one below</p>
+    <script src="https://gist.github.com/DegreeDev/95ad1e81eea9aae6ef2e.js"></script>
+    @using (Html.BeginForm("DontUseKnockout", "Home", FormMethod.Post))
+    {
+        @Html.HiddenFor(x => Model.Id)
+        <div class="form-group row">
+            <div class="col-md-6">
+                @Html.Label("Name", new { @class = "control-label" })
+                @Html.TextBoxFor(x => Model.Name, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-6">
+                @Html.Label("Password", new { @class = "control-label" })
+                @Html.PasswordFor(x => Model.Description, new { @class = "form-control" })
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Login" />
+    }
 
-<h4>There is no need to use Knockout if you don't have an interactive form such as the one below</h4>
-
-@using (Html.BeginForm("DontUseKnockout", "Home", FormMethod.Post))
-{
-	@Html.HiddenFor(x => Model.Id)
-	<div class="form-group row">
-		<div class="col-md-6">
-			@Html.Label("Name", new { @class = "control-label" })
-			@Html.TextBoxFor(x => Model.Name, new { @class = "form-control" })
-		</div>
-	</div>
-	<div class="form-group row">
-		<div class="col-md-6">
-			@Html.Label("Password", new { @class = "control-label" })
-			@Html.PasswordFor(x => Model.Description, new { @class = "form-control" })
-		</div>
-	</div>
-	<input type="submit" class="btn btn-primary" value="Login" />
-}
-
-
+</div>

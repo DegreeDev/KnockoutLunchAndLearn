@@ -1,59 +1,51 @@
 ﻿@model string
-<div class="container">
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="container">
-            <ul class="nav navbar-nav">
-                <a class="navbar-brand" href="#">Knockout L and L</a>
-                <li class="@(Model == "Index" ? "active" : "")">
-                    <a href="@Url.Action("Index")">Home</a>
-                </li>
-                <li class="dropdown @(Model == "DontUseKnockout" || Model == "DoUseKnockout" ? "active" : "")">
-                    <a href="#" 
-                        class="dropdown-toggle" 
-                        data-toggle="dropdown">When To...<b class="caret"></b>
-                    <ul class="dropdown-menu">
-                        <li class="@(Model == "DontUseKnockout" ? "active" : "")">
-                            <a href="@Url.Action("DontUseKnockout")">Not Use Knockout</a>
-                        </li>
-                        <li class="@(Model == "DoUseKnockout" ? "active" : "")">
-                            <a href="@Url.Action("DoUseKnockout")">Use Knockout</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="@(Model == "Observables" ? "active" : "") ">
-                    <a href="@Url.Action("Observables")">Observables</a>
-                </li>
-                <li class="@(Model == "Bindings" ? "active" : "") ">
-                    <a href="@Url.Action("Bindings")">Applying Bindings</a>
-                </li>
-                <li class="@(Model == "Objects" ? "active" : "")">
-                    <a href="@Url.Action("Objects")">Objects</a>
-                </li>
-                <li class="@(Model == "Structure" ? "active" : "")">
-                    <a href="@Url.Action("Structure")">Structure</a>
-                </li>
-                <li class="@(Model == "Loading" ? "active" : "")">
-                    <a href="@Url.Action("Loading")">Loading</a>
-                </li>
-                <li class="@(Model == "BindingHandlers" ? "active" : "")">
-                    <a href="@Url.Action("BindingHandlers")">Binding Handlers</a>
-                </li>
-                <li class="@(Model == "Computed" ? "active" : "")">
-                    <a href="@Url.Action("Computed")">Computed Properties</a>
-                </li>
-                <li class="@(Model == "BindingContext" ? "active" : "")">
-                    <a href="@Url.Action("BindingContext")">The Binding Context</a>
-                </li>
-                 <li class="@(Model == "Require" ? "active" : "")">
-                    <a href="@Url.Action("Require")">RequireJS</a>
-                </li>
-				 <li class="@(Model == "Form" ? "active" : "")">
-                    <a href="@Url.Action("Form")">Using Forms</a>
-                </li>
-				<li class="@(Model == "Lunch" ? "active" : "")">
-					<a href="@Url.Action("Index", "Lunch", new { })">Lunch and Learn</a>
-				</li>
-            </ul>
+<div class="col-lg-3">
+    <div class="nav-panel">
+
+        <h4>Knockout Ref</h4>
+        <div class="list-group">
+            <a class="@(Model == "Index" ? "active" : "") list-group-item" href="@Url.Action("Index")">
+                Home
+            </a>
+            <a class="@(Model == "DontUseKnockout" ? "active" : "") list-group-item" href="@Url.Action("DontUseKnockout")">
+                Not Use Knockout
+            </a>
+            <a class="@(Model == "DoUseKnockout" ? "active" : "") list-group-item" href="@Url.Action("DoUseKnockout")">
+                Use Knockout
+            </a>
+            <a class="@(Model == "Observables" ? "active" : "") list-group-item" href="@Url.Action("Observables")">
+                Observables
+            </a>
+            <a class="@(Model == "Bindings" ? "active" : "") list-group-item" href="@Url.Action("Bindings")">
+                Applying Bindings
+            </a>
+            <a class="@(Model == "Objects" ? "active" : "") list-group-item" href="@Url.Action("Objects")">
+                Objects
+            </a>
+            <a class="@(Model == "Structure" ? "active" : "") list-group-item" href="@Url.Action("Structure")">
+                Structure
+            </a>
+            <a class="@(Model == "Loading" ? "active" : "") list-group-item" href="@Url.Action("Loading")">
+                Loading
+            </a>
+            <a href="@Url.Action("BindingHandlers")" class="@(Model == "BindingHandlers" ? "active" : "") list-group-item">
+                Binding Handlers
+            </a>
+            <a class="@(Model == "Computed" ? "active" : "") list-group-item" href="@Url.Action("Computed")">
+                Computed Properties
+            </a>
+            <a class="@(Model == "BindingContext" ? "active" : "") list-group-item " href="@Url.Action("BindingContext")">
+                The Binding Context
+            </a>
+            <a class="@(Model == "Require" ? "active" : "") list-group-item" href="@Url.Action("Require")">
+                RequireJS
+            </a>
+            <a class="@(Model == "Form" ? "active" : "") list-group-item" href="@Url.Action("Form")">
+                Using Forms
+            </a>
+            <a class="@(Model == "Mapping" ? "active" : "") list-group-item" href="@Url.Action("Mapping")">
+                The Mapping Plugin
+            </a>
         </div>
-    </nav>
+    </div>
 </div>

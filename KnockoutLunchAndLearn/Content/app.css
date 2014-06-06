@@ -8,3 +8,16 @@
 .answer {
 	margin-left: 30px;
 }
+
+.list-group-item  {
+	 color:#333;
+}
+.list-group-item.active {
+	 font-weight:bold;
+}
+.nav-panel{
+	 margin-top:30px;
+}
+.container{
+	 margin-top:20px;
+}

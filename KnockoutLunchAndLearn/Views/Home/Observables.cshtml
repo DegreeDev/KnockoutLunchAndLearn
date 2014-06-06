@@ -2,76 +2,75 @@
 	ViewBag.Title = "Observables";
 }
 @Html.Partial("_Navigation", "Observables")
+<div class="col-lg-9">
+    <h2>Observables</h2>
 
-<h2>Observables</h2>
+    <p>
+        Observables are the most important concept in KnockoutJS and really what makes it worth using. <a href="http://knockoutjs.com/documentation/observables.html">Observables</a> are basically an implementation of the a <a href="http://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern">publisher/subscriber</a> pattern . By publisher subscriber
+        I mean when a value is changed, it publishes the changed value to all of the subscribers. You are able to manually or automatically set up subscription in Knockout.
+    </p>
 
-<p>
-	Observables are the most important concept in KnockoutJS and really what makes it worth using. <a href="http://knockoutjs.com/documentation/observables.html">Observables</a> are basically an implementation of the a <a href="http://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern">publisher/subscriber</a> pattern . By publisher subscriber
-	I mean when a value is changed, it publishes the changed value to all of the subscribers. You are able to manually or automatically set up subscription in Knockout.
-</p>
+    <p>
+        When you a 'data-bind' in the HTML, you are essentailly subscribing to the published events of an observable.
+        This means that when you change an observable, Knockout takes care of updating the value in the UI for you. You can change when this actually happens with the <a href="http://knockoutjs.com/documentation/value-binding.html">valueUpdate</a> binding.
+    </p>
 
-<p>
-	When you a 'data-bind' in the HTML, you are essentailly subscribing to the published events of an observable.
-	This means that when you change an observable, Knockout takes care of updating the value in the UI for you. You can change when this actually happens with the <a href="http://knockoutjs.com/documentation/value-binding.html">valueUpdate</a> binding.
-</p>
+    <div class="well">
+        <div class="row">
+            <div id="test-observable" class="form-group col-md-2">
+                <label data-bind="text: text" class="control-label"></label>
+                <input type="text" data-bind="value: text, valueUpdate: 'keyup'" class="form-control" />
+            </div>
+        </div>
+        <div class="row">
+            <small class="col-md-12">*Note: You can change when the value updates, in this case I chose 'keyup' for demonstration purposes.</small>
+        </div>
+    </div>
 
-<div class="well">
-	<div class="row">
-		<div id="test-observable" class="form-group col-md-2">
-			<label data-bind="text: text" class="control-label"></label>
-			<input type="text" data-bind="value: text, valueUpdate: 'keyup'" class="form-control" />
-		</div>
-	</div>
-	<div class="row">
-		<small class="col-md-12">*Note: You can change when the value updates, in this case I chose 'keyup' for demonstration purposes.</small>
-	</div>
-</div>
+    <hr />
 
-<hr />
+    <h3>Manipulating Observables</h3>
 
-<h3>Manipulating Observables</h3>
+    <p>
+        An observable is simply a function. If you access an obserable like 'self.test'
+        you are asking for the obserable function itself. This will print out if you try and
+        log it to the console something like this <a href="#observable-function">the code for the observable function</a>
+    </p>
 
-<p>
-	An observable is simply a function. If you access an obserable like 'self.test'
-	you are asking for the obserable function itself. This will print out if you try and
-	log it to the console something like this <a href="#observable-function">the code for the observable function</a>
-</p>
+    <script src="https://gist.github.com/DegreeDev/0bd43d71713f0ed76fa8.js"></script>
 
-<script src="https://gist.github.com/DegreeDev/0bd43d71713f0ed76fa8.js"></script>
+    <script src="https://gist.github.com/DegreeDev/95b08dd2c8b2bd98e9e7.js"></script>
 
-<script src="https://gist.github.com/DegreeDev/95b08dd2c8b2bd98e9e7.js"></script>
-
-<script src="https://gist.github.com/DegreeDev/691e9bc3c5bdd3f9bbcf.js"></script>
-
-
-<p>You are essentially overwriting the observable. Anyone accessing it with the () notation will not get an error saying that 'name' is not a function.</p>
-
-<hr />
-<h4>Manual Subscriptions</h4>
-<p>Whenever somebody uses an observable they are essentially subscribing to when the value changes. They will get notified with the new value every time it changes.</p>
-<script src="https://gist.github.com/DegreeDev/c0340110f0d03ffa0865.js"></script>
-<p>In this example, every time the name is changed, it will write out to the console.</p>
-<p>*This is generally discouraged because you can do the exact same thing a computed function</p>
-
-<hr />
-<h4>Don't be afraid of the code: </h4>
-<a href="https://github.com/knockout/knockout/blob/master/src/subscribables/observable.js">The Code</a>
-<p>
-	As you can see here all that the observable does is if it has arguments,
-	it attempts to set the new value and set the valueHasMutated flag to true.
-	If no arguments are passed in, the current value is returned. Nothing too complicated or scary.
-</p>
-
-<script src="https://gist.github.com/DegreeDev/e017b27318594319a2c6.js"></script>
+    <script src="https://gist.github.com/DegreeDev/691e9bc3c5bdd3f9bbcf.js"></script>
 
 
-@section scripts {
-	<script>
-		function ViewModel() {
-			var self = this;
-			self.text = ko.observable("Test");
-		}
-		ko.applyBindings(new ViewModel(), $("#test-observable")[0]);
-	</script>
+    <p>You are essentially overwriting the observable. Anyone accessing it with the () notation will not get an error saying that 'name' is not a function.</p>
 
-}
+    <hr />
+    <h4>Manual Subscriptions</h4>
+    <p>Whenever somebody uses an observable they are essentially subscribing to when the value changes. They will get notified with the new value every time it changes.</p>
+    <script src="https://gist.github.com/DegreeDev/c0340110f0d03ffa0865.js"></script>
+    <p>In this example, every time the name is changed, it will write out to the console.</p>
+    <p>*This is generally discouraged because you can do the exact same thing a computed function</p>
+
+    <hr />
+    <h4>Don't be afraid of the code: </h4>
+    <a href="https://github.com/knockout/knockout/blob/master/src/subscribables/observable.js">The Code</a>
+    <p>
+        As you can see here all that the observable does is if it has arguments,
+        it attempts to set the new value and set the valueHasMutated flag to true.
+        If no arguments are passed in, the current value is returned. Nothing too complicated or scary.
+    </p>
+
+    <script src="https://gist.github.com/DegreeDev/e017b27318594319a2c6.js"></script>
+
+	 </div>
+    @section scripts {
+        <script>
+        	 function ViewModel() {
+        	 	 var self = this;
+        	 	 self.text = ko.observable("Test");
+        	 }
+        	 ko.applyBindings(new ViewModel(), $("#test-observable")[0]);
+        </script>
+    }

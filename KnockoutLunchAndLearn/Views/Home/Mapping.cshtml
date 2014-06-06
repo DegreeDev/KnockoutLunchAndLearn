@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Structure";
+}
+@Html.Partial("_Navigation", "Mapping")
+
+<div class="col-lg-9">
+
+    <h2>The Mapping Plugin</h2>
+
+    <p>
+        The mapping plugin is a plugin built by the creators of Knockout to help separate the VM and the MV.
+        The plugin essentially extends properties onto you model and the initial create. You define your view model
+        and then the mapping plugin takes the data properties form you external call and extends them onto it.
+    </p>
+    <ul>
+        <li>
+            <strong>View Model:</strong> The model that holds all of your client logic.
+            Any state that you don't want to persist should live inside this model.
+        </li>
+        <li>
+            <strong>Data Model:</strong> The model that is returned from the server upon ajax request
+            (yes, make an ajax request for your data). This can be easily serialized (whole object tree)
+            so that the model that was passed down, matches what you serialize up plus any changes.
+        </li>
+    </ul>
+    <h3>Introduction</h3>
+    <p>
+        Here is a simple mapping which maps an array of items onto the view model. Each application should contain
+		  a top level view model which holds all of the data and is the model actually bound to the UI. 
+    </p>
+    <script src="https://gist.github.com/DegreeDev/4a67f8d550a363af25e0.js"></script>
+</div>
+
+@section scripts {
+    <script>
+
+    </script>
+}
