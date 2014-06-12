@@ -91,7 +91,7 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -197,12 +197,14 @@
     <Compile Include="Controllers\KnockoutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LunchController.cs" />
+    <Compile Include="Controllers\PluginController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ComplicatedFormModel.cs" />
     <Compile Include="Models\GridModel.cs" />
+    <Compile Include="Models\ItemCollectionModel.cs" />
     <Compile Include="Models\JsonModel.cs" />
     <Compile Include="Models\SimpleFormModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -300,6 +302,8 @@
     <Content Include="Scripts\builder\viewModel.js" />
     <Content Include="Scripts\DataGrid.js" />
     <Content Include="Scripts\handlebars-v1.3.0.js" />
+    <Content Include="Scripts\knockout-3.1.0.debug.js" />
+    <Content Include="Scripts\knockout-3.1.0.js" />
     <Content Include="Scripts\knockout-sortable.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Scripts\loading\bindings.js" />
@@ -322,8 +326,6 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\knockout-3.0.0.debug.js" />
-    <Content Include="Scripts\knockout-3.0.0.js" />
     <Content Include="Scripts\modernizr-2.7.1.js" />
     <Content Include="Scripts\require.js" />
     <Content Include="Scripts\require.min.js" />
@@ -383,6 +385,8 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Home\BindingContext.cshtml" />
     <Content Include="Views\Home\Mapping.cshtml" />
+    <Content Include="Views\Plugin\Index.cshtml" />
+    <Content Include="Views\Plugin\Old.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

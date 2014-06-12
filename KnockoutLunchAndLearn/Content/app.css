@@ -21,3 +21,32 @@
 .container{
 	 margin-top:20px;
 }
+
+div div.item {
+  display: inline-block;
+  width: 50%;
+  background-color: #8FD6FF; 
+  color:#F0FAFF;
+  font-size:20px;
+  margin-top:10px;
+  padding:10px;
+  border:2px solid #0272B3; 
+  border-radius: 3px;
+  font-weight:bold;
+}
+div.item-list {
+  margin-bottom: 10px; 
+}
+button {
+  color:#528FB2;
+  border: 1px solid #8FD6FF;
+  background-color: #A8DFFF;
+  padding: 5px 10px;
+  font-size:20px;
+  border-radius: 4px;
+  
+}
+button:hover { 
+  cursor: pointer;
+  box-shadow: 1px 1px 5px  #A8DFFF;
+}

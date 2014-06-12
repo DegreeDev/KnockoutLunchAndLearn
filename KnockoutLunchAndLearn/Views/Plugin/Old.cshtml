@@ -1,0 +1,73 @@
+﻿<div data-bind='foreach: items' class='item-list'>
+    <div class='item'>
+        <label data-bind='text:formattedName'></label>
+        <!-- <span data-bind='text: parentId'></span> -->
+    </div>
+
+</div>
+
+<button data-bind='click: save'>Save</button>
+<button data-bind='click: clear'>Clear</button>
+<button data-bind='click: load'>Load</button>
+
+@section scripts {
+    <script>
+    	 function ViewModel(data) {
+    	 	 var self = this;
+    	 	 self.items = ko.observableArray();
+    	 	 self.load = function () {
+    	 	 	 $.getJSON("@Url.Action("Items")", function (data) {
+    	 	 	 	 ko.utils.arrayForEach(data.items, function (item) {
+    	 	 	 	 	 model.items.removeAll();
+    	 	 	 	 	 model.items.push(new ItemViewModel(item.id, item.name /*, this*/));
+    	 	 	 	 });
+    	 	 	 });
+    	 	 };
+    	 	 self.save = function () {
+    	 	 	 alert(ko.toJSON(this));
+    	 	 };
+    	 	 self.clear = function () {
+    	 	 	 self.items.removeAll();
+    	 	 };
+    	 }
+
+    	 function ItemViewModel(id, name, uid) {
+    	 	 var self = this;
+    	 	 self.id = ko.observable(id);
+    	 	 self.name = ko.observable(name);
+    	 	 self.uid = ko.observable(uid);
+    	 	 self.formattedName = ko.computed(function () {
+    	 	 	 return self.id() + ' - ' + self.name();
+    	 	 });
+    	 }
+
+    	 var model = new ViewModel(),
+			  items = model.load();
+
+    	 ko.applyBindings(model);
+
+		 ItemViewModel.prototype.toJSON = function(){
+			return ko.toJS({
+			  id : this.id, 
+			  name: this.name,
+			  uid : this.uid
+			});
+		 };
+
+
+
+    	 //Things to add. 
+    	 /*
+		  Another property 
+			Load the data again
+			Save the data
+			Save the correct data
+			Add parent object
+			Save the correct data
+			Break into seperate files
+			Mock out data (well unmock data in this case)
+			Add a new object
+		 
+		 */
+    </script>
+}

@@ -1,0 +1,90 @@
+﻿<div data-bind='foreach: items' class='item-list'>
+    <div class='item'>
+        <label data-bind='text:formattedName'></label>
+        <!-- <span data-bind='text: parentId'></span> -->
+    </div>
+
+</div>
+
+<button data-bind='click: save'>Save</button>
+<button data-bind='click: clear'>Clear</button>
+<button data-bind='click: load'>Load</button>
+
+@section scripts {
+	 <script>
+		 //viewmodel.js
+    	 function ViewModel(data) {
+    	 	 var self = ko.mapping.fromJS(data, services.mapping, this);
+    	 	 self.id = "Test";
+
+    	 	 self.save = function () {
+    	 	 	 services.save(this);
+    	 	 };
+    	 	 self.clear = function () {
+    	 	 	 self.items.removeAll();
+    	 	 };
+    	 	 self.load = function () {
+    	 	 	 services.load(function (data) {
+    	 	 	 	 ko.mapping.fromJS(data, services.mapping, self);
+    	 	 	 });
+    	 	 };
+    	 }
+    	 function ItemViewModel(data, parent) {
+    	 	 var self = ko.mapping.fromJS(data, services.mapping, this);
+    	 	 self.formattedName = ko.computed(function () {
+    	 	 	 return self.id() + ' - ' + self.name();
+    	 	 });
+    	 	 self.testName = ko.observable();
+    	 	 self.name3 = ko.observable();
+    	 	 self.formattedName.subscribe(function (newValue) {
+    	 	 	 self.name3(self.testName() + newValue);
+    	 	 });
+    	 	 ko.computed(function(){
+    	 	 	 self.name3(self.testName() + self.formattedName());
+    	 	 });
+    	 }
+		 //sevices.js
+    	 var services = {
+    	 	 load: function (callback) {
+    	 	 	 $.getJSON("@Url.Action("Items")", callback)
+    	 	 },
+    	 	 bind: function (model, element) {
+    	 	 	 ko.applyBindings(model, element);
+    	 	 },
+    	 	 save: function (model) {
+    	 	 	 alert(ko.mapping.toJSON(model));
+    	 	 },
+    	 	 mapping: {
+    	 	 	 viewModel: {
+    	 	 	 	 create: function (options) {
+    	 	 	 	 	 return new ViewModel(options.data);
+    	 	 	 	 }
+    	 	 	 },
+    	 	 	 items: {
+    	 	 	 	 create: function (options) {
+    	 	 	 	 	 return new ItemViewModel(options.data /*, options.parent*/);
+    	 	 	 	 }
+    	 	 	 }
+    	 	 }
+    	 };
+		 //bindings.js
+    	 services.load(function (data) {
+    	 	 var model = ko.mapping.fromJS(data, services.mapping.viewModel);
+    	 	 debugger;
+    	 	 services.bind(model, document.getElementById("view"));
+    	 });
+
+    	 //functionality to add. 
+    	 /*
+			Load the data again
+			Save the data
+			Save the correct data
+			Add parent object
+			Save the correct data
+			Break into seperate files
+			Mock out data (well unmock data in this case)
+			Add a new object
+			
+		 */
+	  </script>	 
+}
