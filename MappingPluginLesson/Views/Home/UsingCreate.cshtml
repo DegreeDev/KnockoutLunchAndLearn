@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Simple";
+}
+<div id="simple-example">
+    <form action="@Url.Action("SaveUsingCreate")" method="post">
+        <input type="hidden" name="Id" data-bind="value: Id" />
+		  <input type="hidden" name="ProductName" data-bind="value: ProductName" />
+        <input type="hidden" name="CurrentReleaseName" data-bind="value: CurrentReleaseName" />
+        <h2>
+            <!-- ko text: ProductName--><!-- /ko-->
+            <small data-bind="text:CurrentReleaseName"></small>
+        </h2>
+        <h4>Team Members</h4>
+        <div data-bind="foreach: TeamMembers">
+            <input type="hidden" name="Id" data-bind="value: Id, attr: { name : 'TeamMembers[' + $index() + '].Id'}" />	
+            <div class="row">
+                <div class="well well-sm">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type='text' data-bind="value: Name, attr: { name : 'TeamMembers[' + $index() + '].Name'}" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Preferred Languages:
+                        </label>
+                        <span data-bind="text: formattedLangs"></span>
+                        <div data-bind="foreach: PreferredLanguages">
+                            <input type="hidden" data-bind="value: $data, attr : { name : 'TeamMembers[' + $parentContext.$index() + '].PreferredLanguages[' + $index() + ']' }" />
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-danger" data-bind="click: $parent.Remove">Remove</button>
+                </div>
+            </div>
+            
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+@section scripts {
+    <script src="@Url.Content("/Scripts/Simple/UsingCreateMapping.js")"></script>
+}

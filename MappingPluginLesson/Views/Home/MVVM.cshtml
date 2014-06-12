@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "MVVM";
+}
+
+<h2>What is MVVM and how is this not MVVM?</h2>
+
+<p>
+    Technically in Model - View - ViewModel there is supposed to be a seperatation
+    between the Model (you data) and your ViewModel (the thing that has actions on it).
+</p>
+<p>
+    This would look something like this.
+</p>
+
+<script src="https://gist.github.com/DegreeDev/7f0a123bba9647b4c2ff.js"></script>
+
+<a href="http://jsbin.com/wufuka/5/edit" title="Fiddle">Fiddle</a>
+
+<p>
+    This gives you seperation of the Model (datastore) from the ViewModel (ViewModel).
+    You can freely edit your version of the data model without changing the actual data model.
+    This provides free transactional code (just don't update the model).
+</p>
+
+
+<p>
+    What I'm showing you today is technically not MVVM becuase you are always editing the data model.
+    There is nothing stopping you (in KO or the mapping plugin) from writing code in a purist MVVM pattern.
+</p>

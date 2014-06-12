@@ -1,0 +1,60 @@
+﻿<h2>init.js</h2>
+<p>Set up anything you need, add your app to the window (scoping), set up you mapping etc</p>
+<script src="https://gist.github.com/DegreeDev/6edcb243645ef18e6834.js"></script>
+
+<h2>bindings.js</h2>
+<p>Used to apply you bindings and call the initial load of your data</p>
+<script src="https://gist.github.com/DegreeDev/2eabb0d0d0a8d2038076.js"></script>
+
+<h2>app.js</h2>
+<p>Used to seperate your view models, can be one, can be many</p>
+<script src="https://gist.github.com/DegreeDev/a62d35152c57954124b9.js"></script>
+
+<h2>services.js</h2>
+<p>We use services to abstract away data calls.</p>
+<script src="https://gist.github.com/DegreeDev/870185c37644fae5b587.js"></script>
+
+
+<h2>Example:</h2>
+<div id="simple-example">
+    <form action="@Url.Action("SaveUsingCreate")" method="post" data-bind="submit: Save">
+        <input type="hidden" name="Id" data-bind="value: Id" />
+        <input type="hidden" name="ProductName" data-bind="value: ProductName" />
+        <input type="hidden" name="CurrentReleaseName" data-bind="value: CurrentReleaseName" />
+        <h2>
+            <!-- ko text: ProductName--><!-- /ko-->
+            <small data-bind="text:CurrentReleaseName"></small>
+        </h2>
+        <h4>Team Members</h4>
+        <div data-bind="foreach: TeamMembers">
+            <input type="hidden" name="Id" data-bind="value: Id, attr: { name : 'TeamMembers[' + $index() + '].Id'}" />
+            <div class="row">
+                <div class="well well-sm">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type='text' data-bind="value: Name, attr: { name : 'TeamMembers[' + $index() + '].Name'}" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Preferred Languages:
+                        </label>
+                        <span data-bind="text: formattedLangs"></span>
+                        <div data-bind="foreach: PreferredLanguages">
+                            <input type="hidden" data-bind="value: $data, attr : { name : 'TeamMembers[' + $parentContext.$index() + '].PreferredLanguages[' + $index() + ']' }" />
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary" data-bind="click: Save">Save</button>
+                    <button type="button" class="btn btn-danger" data-bind="click: $parent.Remove">Remove</button>
+                </div>
+            </div>
+
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+@section scripts {
+	 <script src="@Url.Content("/Scripts/Structure/init.js")"></script>
+    <script src="@Url.Content("/Scripts/Structure/services.js")"></script>
+    <script src="@Url.Content("/Scripts/Structure/app.js")"></script>
+    <script src="@Url.Content("/Scripts/Structure/bindings.js")"></script>
+}
