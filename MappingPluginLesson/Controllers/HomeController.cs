@@ -66,6 +66,5 @@ namespace MappingPluginLesson.Controllers
 				return View();
 		  }
 
-
 	 }
 }

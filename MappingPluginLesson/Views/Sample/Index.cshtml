@@ -1,0 +1,107 @@
+﻿@{
+	ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<select data-bind="selectGroup: { groups : groupedOptions }, selectedOptions : selectedOptions" size="10"></select>
+
+<button data-bind="click: AddGroup">Add Group</button>
+<button data-bind="click: RemoveGroup">Remove Group</button>
+
+<div data-bind="foreach: selectedOptions">
+	<p data-bind="text: $data"></p>
+</div>
+
+@section scripts{
+
+	<script>
+
+		ko.bindingHandlers.selectGroup = {
+			init: function (e, va, aba) {
+			},
+			update: function (e, va, aba) {
+				var $e = $(e),
+					value = va(),
+					groups = value.groups,
+					selectedOptions = aba.get("selectedOptions");
+
+				$e.empty();
+
+				ko.utils.arrayForEach(groups(), function (group) {
+
+					var $optgroup = $("<optgroup />");
+					ko.applyBindingsToNode($optgroup[0], { attr: { label: group.name } });
+					$e.append($optgroup);
+
+					ko.utils.arrayForEach(group.tasks(), function (task) {
+						var $option = $("<option />");
+
+						console.log(selectedOptions());
+						console.log(task.id());
+
+						if (selectedOptions().indexOf(task.id()) != -1) {
+							$option.attr("selected", true);
+						}
+
+						ko.applyBindingsToNode($option[0], { text: task.name, value: task.id });
+						$optgroup.append($option);
+					});
+				});
+
+				$e.attr("multiple", true);
+			}
+		}
+		function ViewModel() {
+			var self = this;
+
+			self.groupedOptions = ko.observableArray();
+
+			var tc1 = new TaskCollecionModel("TC1");
+			tc1.tasks.push(new TaskModel(1, "Task 1"));
+			tc1.tasks.push(new TaskModel(2, "Task 2"));
+			tc1.tasks.push(new TaskModel(3, "Task 3"));
+
+
+
+			var tc2 = new TaskCollecionModel("TC2");
+			tc2.tasks.push(new TaskModel(4, "Task 4"));
+			tc2.tasks.push(new TaskModel(5, "Task 5"));
+			tc2.tasks.push(new TaskModel(6, "Task 6"));
+
+
+			self.groupedOptions.push(tc1);
+			self.groupedOptions.push(tc2);
+
+
+			self.AddGroup = function () {
+				var tc3 = new TaskCollecionModel("TC3");
+				tc3.tasks.push(new TaskModel(7, "Task 7"));
+				tc3.tasks.push(new TaskModel(8, "Task 8"));
+				tc3.tasks.push(new TaskModel(9, "Task 9"));
+				self.groupedOptions.push(tc3);
+			};
+			self.RemoveGroup = function () {
+				self.groupedOptions.remove(self.groupedOptions()[0]);
+			};
+
+			self.selectedOptions = ko.observableArray();
+
+		}
+
+		function TaskCollecionModel(name) {
+			var self = this;
+
+			self.name = ko.observable(name);
+			self.tasks = ko.observableArray();
+		}
+		function TaskModel(id, name) {
+			var self = this;
+			self.id = ko.observable(id);
+			self.name = ko.observable(name);
+		}
+
+		ko.applyBindings(new ViewModel());
+	</script>
+
+}
