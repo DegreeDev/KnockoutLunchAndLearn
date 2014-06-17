@@ -1,37 +1,37 @@
 ﻿$(function () {
-	 function TeamMemberViewModel(data) {
-	 	 var self = ko.mapping.fromJS(data, mapping, this);
+	function TeamMemberViewModel(data) {
+		var self = ko.mapping.fromJS(data, mapping, this);
 
-	 	 self.formattedLangs = ko.computed(function () {
-	 	 	 return self.PreferredLanguages().join();
-	 	 });
-	 }
-	 function TeamViewModel(data) {
-	 	 var self = ko.mapping.fromJS(data, mapping, this);
+		self.formattedLangs = ko.computed(function () {
+			return self.PreferredLanguages().join();
+		});
+	}
+	function TeamViewModel(data) {
+		var self = ko.mapping.fromJS(data, mapping, this);
 
-	 	 self.Remove = function (member) {
-	 	 	 self.TeamMembers.remove(member);
-	 	 };
-	 }
+		self.Remove = function (member) {
+			self.TeamMembers.remove(member);
+		};
+	}
 
-	 var mapping = {
-	 	 TeamMembers: {
-	 	 	 create: function (options) {
-	 	 	 	 return new TeamMemberViewModel(options.data);
-	 	 	 }
-	 	 },
-	 	 Team: {
-	 	 	 create: function (options) {
-	 	 	 	 return new TeamViewModel(options.data);
-	 	 	 }
-	 	 }
-	 };
+	var mapping = {
+		TeamMembers: {
+			create: function (options) {
+				return new TeamMemberViewModel(options.data);
+			}
+		},
+		Team: {
+			create: function (options) {
+				return new TeamViewModel(options.data);
+			}
+		}
+	};
 
-	 $.getJSON("/Home/SimpleData", "", function (data) {
-	 	 var model = ko.mapping.fromJS( data, mapping.Team);
-	 	 ko.applyBindings(model);
-	 });
-	 
+	$.getJSON("/Home/SimpleData", "", function (data) {
+		var model = ko.mapping.fromJS(data, mapping.Team);
+		ko.applyBindings(model);
+	});
+
 });
 //Know what your object will serialize into. 
 /*{
