@@ -179,6 +179,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Serialization\SimpleObject.cs" />
     <Compile Include="Models\TeamMemberViewModel.cs" />
     <Compile Include="Models\TeamViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -247,6 +248,7 @@
     <Content Include="Views\Sample\Index.cshtml" />
     <Content Include="Views\Overtime\BindingHandlers.cshtml" />
     <Content Include="Views\Overtime\ComputedWrappers.cshtml" />
+    <Content Include="Views\Home\Serialization.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

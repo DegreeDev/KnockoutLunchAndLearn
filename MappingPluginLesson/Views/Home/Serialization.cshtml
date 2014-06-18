@@ -1,0 +1,94 @@
+﻿@{
+	ViewBag.Title = "Serialization";
+}
+
+<h2>Serialization</h2>
+
+<h3>How objects in serialize from into JSON?</h3>
+
+<div class="break">
+	<script src="https://gist.github.com/DegreeDev/c38226f8a0196a6c2bec.js"></script>
+</div>
+<div data-bind="clickShow: { node: '#simple-object' }">
+	<script src="https://gist.github.com/DegreeDev/84fa2b4b74048323e646.js"></script>
+</div>
+<button class="btn btn-primary" id="simple-object">Toggle</button>
+
+<div class="break">
+	<script src="https://gist.github.com/DegreeDev/d942fee695f400df34a3.js"></script>
+</div>
+<div data-bind="clickShow: { node: '#simple-array' }">
+	<script src="https://gist.github.com/DegreeDev/dd72f7d126db349c3b23.js"></script>
+</div>
+<button class="btn btn-primary" id="simple-array">Toggle</button>
+
+<div class="break">
+	<script src="https://gist.github.com/DegreeDev/352370add758f62267db.js"></script>
+</div>
+<div data-bind="clickShow: { node: '#object-array' }">
+	<script src="https://gist.github.com/DegreeDev/04551e248b286ca5f066.js"></script>
+</div>
+<button class="btn btn-primary" id="object-array">Toggle</button>
+
+<div class="break">
+	<script src="https://gist.github.com/DegreeDev/d9004dc5c0527fd22fde.js"></script>
+</div>
+<div data-bind="clickShow: { node: '#nested-object' }">
+	<script src="https://gist.github.com/DegreeDev/9c00c8d0f2c9ef67fd7a.js"></script>
+</div>
+<button class="btn btn-primary" id="nested-object">Toggle</button>
+
+<div class="break">
+	<p>Demo : @Html.ActionLink("Default Dictionary", "Dictionary") - @Html.ActionLink("Json.Net", "DictionaryJsonNet")</p>
+
+	<script src="https://gist.github.com/DegreeDev/95fda199db87f3a0f8cb.js"></script>
+</div>
+<div data-bind="clickShow: { node: '#dictionary' }">
+	<script src="https://gist.github.com/DegreeDev/f4a5788c99159bd0a672.js"></script>
+
+	<p>What can I do with this? <button class="btn btn-primary" id="js-dictionary">Toggle</button></p>
+	<div data-bind="clickShow: { node: '#js-dictionary' }">
+		<script src="https://gist.github.com/DegreeDev/1f1153bc56680b94b8ae.js"></script>
+	</div>
+	
+
+</div>
+
+<button class="btn btn-primary" id="dictionary">Toggle</button>
+
+<style>
+	.break {
+		margin-top: 100px;
+		padding-top:10px;
+		border-top: 1px dashed #eee;
+	}
+		.break:first-of-type {
+			margin-top: 10px;
+		}
+</style>
+@section scripts {
+	<script>
+		ko.bindingHandlers.clickShow = {
+			init: function (e, va) {
+				$(e).hide();
+
+				var triggerEl = $(va().node)[0],
+					show = function () {
+						$(e).fadeToggle();
+					};
+
+				ko.applyBindingsToNode(triggerEl, { click: show });
+			},
+			update: function (e, va) {
+
+			}
+		}
+
+		function ViewModel() {
+
+
+		}
+		ko.applyBindings(new ViewModel());
+	</script>
+
+}
