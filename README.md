@@ -1,4 +1,4 @@
 KnockoutLunchAndLearn
 =====================
 
-Running Example - http://knockoutlunchandlearn.azurewebsites.net
+Running Example - http://nthdegreeko.azurewebsites.net
